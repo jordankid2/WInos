@@ -410,7 +410,6 @@
     <ClInclude Include="C_avcodec-57.h" />
     <ClInclude Include="C_avutil-55.h" />
     <ClInclude Include="C_bxsdk.h" />
-    <ClInclude Include="C_cmd.h" />
     <ClInclude Include="C_log.h" />
     <ClInclude Include="DifScreenSpyDlg.h" />
     <ClInclude Include="helper.h" />

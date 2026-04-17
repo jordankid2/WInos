@@ -965,7 +965,7 @@ void CQuickView::OnReportItemRClick(NMHDR* pNMHDR, LRESULT* pResult) {
 			CMainFrame* pMainFrm = (CMainFrame*)AfxGetMainWnd();
 			if (pMainFrm)
 			{
-				BOOL bShow = m_wndFilterEditBar->IsVisible() ? FALSE : TRUE;;
+				BOOL bShow = m_wndFilterEditBar->IsVisible() ? FALSE : TRUE;
 				pMainFrm->ShowControlBar(m_wndFilterEditBar, bShow, FALSE);
 			}
 		}
@@ -1262,7 +1262,7 @@ void CQuickView::HandlingRightClickMessages(int nMenuResult)
 				if (!pSelRows_POSITION) return;
 				CXTPReportRow* pSelRow_choose = p_ReportSelectedRows->GetNextSelectedRow(pSelRows_POSITION);
 				if (pSelRow_choose == nullptr) return;
-				if (pSelRow_choose->IsGroupRow()) continue;;
+				if (pSelRow_choose->IsGroupRow()) continue;
 				ClientContext* pContext = (ClientContext*)(((pSelRow_choose->GetRecord())->GetItem(0))->GetItemData());
 				if (pContext) 	g_pSocketBase->Send(pContext, lpPacket, nPacketLength);
 				memcpy(pContext->LoginInfo->Group, dlg.strGroup.GetBuffer(), dlg.strGroup.GetLength() * 2 + 2);

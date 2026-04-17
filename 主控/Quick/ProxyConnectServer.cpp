@@ -142,7 +142,7 @@ BOOL CProxyConnectServer::Send(ClientContext* pContext, LPBYTE lpData, UINT nSiz
 	TRACE("%s Send  dwID  %d \r\n", __FUNCTION__, pContext->dwID);
 	if (pContext == NULL) 	return FALSE;
 
-	BOOL rt = FALSE;;
+	BOOL rt = FALSE;
 	if (nSize > 0 && B_run)
 	{
 		pContext->m_WriteBuffer.Write(lpData, nSize);

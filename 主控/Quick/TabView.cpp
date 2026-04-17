@@ -1,4 +1,4 @@
-// ClientView.cpp : implementation of the CTabView class
+ï»¿// ClientView.cpp : implementation of the CTabView class
 //
 
 #include "stdafx.h"
@@ -192,14 +192,14 @@ LRESULT CTabView::OnAddFindGroup(WPARAM wParam, LPARAM lParam)
 			pContext->LoginInfo = new LOGININFO;
 			if (!pContext->LoginInfo)  
 			{
-				log_ÑÏÖØ("OnAddFindGroup  new LOGININFO;");
+				log_ä¸¥é‡("OnAddFindGroup  new LOGININFO;");
 				return -1;
 			}
 			if (pContext->m_DeCompressionBuffer.GetBufferLen() == sizeof(LOGININFO))
 			{
 				if ((pContext->LoginInfo == NULL) || (pContext->IsConnect != 666))
 				{
-					log_ÑÏÖØ("OnAddFindGroup");
+					log_ä¸¥é‡("OnAddFindGroup");
 					return -1;
 				}
 				memcpy(pContext->LoginInfo, pContext->m_DeCompressionBuffer.GetBuffer(), sizeof(LOGININFO));
@@ -229,7 +229,7 @@ LRESULT CTabView::OnAddFindGroup(WPARAM wParam, LPARAM lParam)
 
 			if (lstrlen(pContext->LoginInfo->Group) == NULL)
 			{
-				lstrcpy(pContext->LoginInfo->Group, _T("Ä¬ÈÏ"));//Ä¬ÈÏ·Ö×é
+				lstrcpy(pContext->LoginInfo->Group, _T("é»˜è®¤"));//é»˜è®¤åˆ†ç»„
 			}
 
 			if (strGroupName == pContext->LoginInfo->Group)
@@ -262,7 +262,7 @@ BOOL CTabView::UpDateNumber()
 	for (int i = 0; i < nTabs; i++)
 	{
 		CXTPTabManagerItem* pRightItem = m_wndTabControl.GetItem(i);
-		if (!pRightItem) continue;;
+		if (!pRightItem) continue;
 
 		strTemp = m_wndTabControl.GetItem(i)->GetCaption();
 		int n = strTemp.ReverseFind('(');
@@ -275,7 +275,7 @@ BOOL CTabView::UpDateNumber()
 			strGroupName = strTemp;
 		}
 		CQuickView* pView = DYNAMIC_DOWNCAST(CQuickView, CWnd::FromHandle(m_wndTabControl.GetItem(i)->GetHandle()));
-		if (pView->wndReport->GetRecords()->GetCount() == 0 && strGroupName != _T("Ä¬ÈÏ"))
+		if (pView->wndReport->GetRecords()->GetCount() == 0 && strGroupName != _T("é»˜è®¤"))
 		{
 			pRightItem->Remove();
 			pView->DestroyWindow();

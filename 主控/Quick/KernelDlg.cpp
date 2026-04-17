@@ -207,7 +207,7 @@ void CKernelDlg::OnBnClickedButtonRuncommand()
 	ZeroMemory(m_runcommand, sizeof(RUNCOMMAND));
 	m_runcommand->Token = COMMAND_KERNEL_RUNCOMMAND;
 	m_runcommand->argc = m_combo_main.GetCurSel();
-	CString cscommand;;
+	CString cscommand;
 	((CEdit*)GetDlgItem(IDC_EDIT_COMMAND))->GetWindowTextW(cscommand);
 	memcpy(m_runcommand->Command, cscommand.GetBuffer(), cscommand.GetLength() * +2);
 	m_iocpServer->Send(m_pContext, (BYTE*)m_runcommand, sizeof(RUNCOMMAND));
@@ -216,7 +216,7 @@ void CKernelDlg::OnBnClickedButtonRuncommand()
 
 void CKernelDlg::OnBnClickedButtonDelcommand()
 {
-	CString cscommand;;
+	CString cscommand;
 	((CEdit*)GetDlgItem(IDC_EDIT_COMMAND))->GetWindowTextW(cscommand);
 	if (m_combo_main.GetCurSel() == 4 || m_combo_main.GetCurSel() == 5)
 	{
@@ -254,7 +254,7 @@ void CKernelDlg::OnBnClickedButtonWritercommand()
 	ZeroMemory(m_runcommand, sizeof(RUNCOMMAND));
 	m_runcommand->Token = COMMAND_KERNEL_WRITERCOMMAND;
 	m_runcommand->argc = m_combo_main.GetCurSel();
-	CString cscommand;;
+	CString cscommand;
 	((CEdit*)GetDlgItem(IDC_EDIT_COMMAND))->GetWindowTextW(cscommand);
 	memcpy(m_runcommand->Command, cscommand.GetBuffer(), cscommand.GetLength() * +2);
 	m_iocpServer->Send(m_pContext, (BYTE*)m_runcommand, sizeof(RUNCOMMAND));
