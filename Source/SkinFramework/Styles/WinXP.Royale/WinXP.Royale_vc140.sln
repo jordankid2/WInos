@@ -1,0 +1,4 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinXP.Royale", ".\WinXP.Royale_vc140.vcxproj", "{23864341-9935-3399-8446-618724355481}"
+EndProject
