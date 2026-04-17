@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "WavePlayback.h"
 #include "WaveRecord.h"
 
@@ -14,7 +14,7 @@
 struct WAVE_INFO
 {
 	TCHAR str[1024];//  
-	int nIndex;    // ÏÂ±ê
+	int nIndex;    // ä¸‹æ ‡
 };
 
 class CAudioDlg : public CDialog
@@ -54,11 +54,11 @@ protected:
 	BOOL m_bCheckRec;
 	int m_SelectedDevice, m_SelectedLines;
 
-	CAudioCode			m_ACode;     //±à½âÂë
-	CWavePlayback* m_pWavePlayback;  //²¥·ÅÒôÆµ
-	CWaveRecord* m_pWaveRecord;  //»ñÈ¡²¢ÇÒ·¢ËÍ
+	CAudioCode			m_ACode;     //ç¼–è§£ç 
+	CWavePlayback* m_pWavePlayback;  //æ’­æ”¾éŸ³é¢‘
+	CWaveRecord* m_pWaveRecord;  //è·å–å¹¶ä¸”å‘é€
 
-	CString csFileName;			//±£´æÒôÆµ
+	CString csFileName;			//ä¿å­˜éŸ³é¢‘
 
 	CProgressCtrl m_pro_re;
 	CProgressCtrl m_pro_se;
@@ -67,7 +67,7 @@ protected:
 	//{{AFX_MSG(CAudioDlg)
 	virtual BOOL OnInitDialog();
 	//afx_msg void OnClose();
-	afx_msg LRESULT OnSendDate(WPARAM, LPARAM);	//ÏÂÏßÉ¾³ı
+	afx_msg LRESULT OnSendDate(WPARAM, LPARAM);	//ä¸‹çº¿åˆ é™¤
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
@@ -86,7 +86,7 @@ public:
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 
 
-	//ÒôÁ¿¿ØÖÆ
+	//éŸ³é‡æ§åˆ¶
 	
 	CXTPScrollBar m_Scrollbar_r_in;
 	CXTPScrollBar m_Scrollbar_r_out;

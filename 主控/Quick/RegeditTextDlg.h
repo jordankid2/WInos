@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 // RegeditTextDlg.h : header file
 //
 
@@ -17,7 +17,7 @@ public:
 	bool EPath;
 	bool EKey;
 	bool isOK;
-	bool isDWORD;             //�Ƿ�ΪDWORDֵ
+	bool isDWORD;             //是否为DWORD值
 // Dialog Data
 	//{{AFX_DATA(CRegeditTextDlg)
 	enum { IDD = IDD_REGEDIT_TEXT };

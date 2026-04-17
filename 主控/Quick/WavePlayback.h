@@ -1,4 +1,4 @@
-// WavePlayback.h: interface for the CWavePlayback class.
+ï»¿// WavePlayback.h: interface for the CWavePlayback class.
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -15,9 +15,9 @@ public:
 	void SetVolume(float volmultiple);
 	int  volume_adjust(short* in_buf, float in_vol);
 protected:
-	// ±àÂëÊı¾İ
+	// ç¼–ç æ•°æ®
 	char				m_AudioBuffer[102400];
-	// ±àÂëÆ÷
+	// ç¼–ç å™¨
 	CAudioCode*			m_pACode;
 
 	float m_volmultiple;

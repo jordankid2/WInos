@@ -1,4 +1,4 @@
-// QuickDoc.h : interface of the CQuickDoc class
+﻿// QuickDoc.h : interface of the CQuickDoc class
 //
 
 

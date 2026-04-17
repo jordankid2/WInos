@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-// CKernelDlg ¶Ô»°¿ò
+// CKernelDlg å¯¹è¯æ¡†
 enum
 {
 	COMMAND_KERNEL_INIT,
@@ -54,18 +54,18 @@ class CKernelDlg : public CXTPResizeDialog
 	//DECLARE_DYNAMIC(CKeyBoardDlg)
 
 public:
-	CKernelDlg(CWnd* pParent = NULL, ISocketBase* IOCPServer = NULL, ClientContext* ContextObject = NULL);   // ±ê×¼¹¹Ôìº¯Êı
+	CKernelDlg(CWnd* pParent = NULL, ISocketBase* IOCPServer = NULL, ClientContext* ContextObject = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
 //	virtual ~CKeyBoardDlg();
 	ClientContext* m_pContext;
 	ISocketBase* m_iocpServer;
 	HICON          m_hIcon;
 	void OnReceiveComplete(void);
 	void OnReceive();
-	// ¶Ô»°¿òÊı¾İ
+	// å¯¹è¯æ¡†æ•°æ®
 	enum {IDD = IDD_KERNEL	};
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 	virtual void PostNcDestroy();
 	virtual void OnCancel();
 	DECLARE_MESSAGE_MAP()

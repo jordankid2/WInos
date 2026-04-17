@@ -1,4 +1,4 @@
-// Quick.cpp : Defines the class behaviors for the application.
+ï»¿// Quick.cpp : Defines the class behaviors for the application.
 //
 
 #include "stdafx.h"
@@ -111,17 +111,17 @@ BOOL CQuickApp::InitInstance()
 
 #ifdef ONLINE_TIME
 	CString strSysTime, strDeadline, strSWCreateTime;
-	CTime sysTime;//ÏµÍ³Ê±¼ä
+	CTime sysTime;//ç³»ç»Ÿæ—¶é—´
 	sysTime = CTime::GetCurrentTime();
 	strSysTime = sysTime.Format(_T("%Y%m%d"));
-	strSWCreateTime.Format(_T("20230427"));//Ê±¼äÎªÈí¼şÉú³ÉÈÕÆÚ£¬ÓÃÓÚ±È½Ïµ±Ç°ÏµÍ³Ê±¼äÊÇ·ñ±ÈÉú³ÉÈÕÆÚ»¹Ôç
-	strDeadline.Format(_T("20230927"));//Èí¼şµÄ½ØÖ¹ÆÚÏŞ
-	//ÅĞ¶ÏÏµÍ³Ê±¼äÊÇ·ñ¸ü¸Ä
+	strSWCreateTime.Format(_T("20230427"));//æ—¶é—´ä¸ºè½¯ä»¶ç”Ÿæˆæ—¥æœŸï¼Œç”¨äºæ¯”è¾ƒå½“å‰ç³»ç»Ÿæ—¶é—´æ˜¯å¦æ¯”ç”Ÿæˆæ—¥æœŸè¿˜æ—©
+	strDeadline.Format(_T("20230927"));//è½¯ä»¶çš„æˆªæ­¢æœŸé™
+	//åˆ¤æ–­ç³»ç»Ÿæ—¶é—´æ˜¯å¦æ›´æ”¹
 	if (strSysTime < strSWCreateTime)
 	{
 		return FALSE;
 	}
-	//ÅĞ¶ÏÊÇ·ñµ½½ØÖ¹ÈÕÆÚ
+	//åˆ¤æ–­æ˜¯å¦åˆ°æˆªæ­¢æ—¥æœŸ
 	/*if (strSysTime > strDeadline)
 	{
 		return FALSE;

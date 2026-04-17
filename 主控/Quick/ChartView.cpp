@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "Quick.h"
 #include "MainFrm.h"
 #include "ChartView.h"
@@ -30,7 +30,7 @@ BEGIN_MESSAGE_MAP(CChartView, CXTPResizeFormView)
 END_MESSAGE_MAP()
 
 
-// CChartView ���
+// CChartView 诊断
 
 #ifdef _DEBUG
 void CChartView::AssertValid() const
@@ -56,7 +56,7 @@ void CChartView::OnInitialUpdate()
 	{
 		SetResize(IDC_CHARTCONTROL, XTP_ANCHOR_TOPLEFT, XTP_ANCHOR_BOTTOMRIGHT);
 		CXTPChartTitle* pTitle = m_wndChartControl.GetContent()->GetTitles()->Add(new CXTPChartTitle());
-		pTitle->SetText(_T("ϵͳͳ��"));
+		pTitle->SetText(_T("系统统计"));
 		binit = true;
 	}
 
@@ -85,7 +85,7 @@ void CChartView::AddSeries()
 	pPieStyle->SetTorus(TRUE);
 	pPieStyle->SetDepth(pPieStyle->GetDepth() * 2);
 	((CXTPChartPieSeriesLabel*)pPieStyle->GetLabel())->SetPosition(xtpChartPieLabelOutside);
-	((CXTPChartPieSeriesLabel*)pPieStyle->GetLabel())->SetFormat(_T("{V} ̨"));
+	((CXTPChartPieSeriesLabel*)pPieStyle->GetLabel())->SetFormat(_T("{V} 台"));
 
 	m_wndChartControl.GetContent()->GetAppearance()->LoadAppearance(_T("CHART_APPEARANCE_GRAY") );
 	m_wndChartControl.GetContent()->OnChartChanged();

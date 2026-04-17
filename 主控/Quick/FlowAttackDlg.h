@@ -1,4 +1,4 @@
-
+ï»¿
 #pragma once
 /////////////////////////////////////////
 // CFlowAttackDlg dialog
@@ -6,16 +6,16 @@
 
 enum
 {
-	ATTACK_CCFLOOD,     //±äÒìCC
-	ATTACK_IMITATEIE,   //Ä£ÄâIE
-	ATTACK_LOOPCC,      //ÂÖ»ØCC
+	ATTACK_CCFLOOD,     //å˜å¼‚CC
+	ATTACK_IMITATEIE,   //æ¨¡æ‹ŸIE
+	ATTACK_LOOPCC,      //è½®å›žCC
 	ATTACK_ICMPFLOOD,   //ICMP
 	ATTACK_UDPFLOOD,    //UDP
 	ATTACK_TCPFLOOD,    //TCP
 	ATTACK_SYNFLOOD,	//SYN
-	ATTACK_BRAINPOWER,  //ÖÇÄÜ.
-	CUSTOM_TCPSEND = 100, //TCP ·¢°ü
-	CUSTOM_UDPSEND,     //UDP ·¢°ü
+	ATTACK_BRAINPOWER,  //æ™ºèƒ½.
+	CUSTOM_TCPSEND = 100, //TCP å‘åŒ…
+	CUSTOM_UDPSEND,     //UDP å‘åŒ…
 };
 
 
@@ -32,8 +32,8 @@ public:
 
 	DECLARE_EASYSIZE
 
-	LPVOID Point;//¸¸´°¿ÚÖ¸Õë
-	//LPVOID ViewPoint;//View Ö¸Õë
+	LPVOID Point;//çˆ¶çª—å£æŒ‡é’ˆ
+	//LPVOID ViewPoint;//View æŒ‡é’ˆ
 
 // Dialog Data
 	//{{AFX_DATA(CFlowAttackDlg)

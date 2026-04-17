@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
  * Header: SecureEngineCustomVMs_VC_inline.h
  * Description: VC inline assembly macros definitions
  *

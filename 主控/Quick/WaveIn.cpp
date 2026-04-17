@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "WaveIn.h"
 #include "math.h"
 #pragma comment(lib,"Winmm")

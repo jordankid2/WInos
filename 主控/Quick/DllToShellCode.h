@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <stdint.h>
 void* get_shellcode_main(int is_x64, int* osize);
 void* get_shellcode_aplib(int is_x64, int* osize);

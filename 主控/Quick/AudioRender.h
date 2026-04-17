@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Buffer.h"
 #include <mmdeviceapi.h>
 #include <Audioclient.h>
@@ -25,7 +25,7 @@ public:
 	BOOL IsRendering() const;
 	BOOL PlayBuffer(LPBYTE szBuffer, DWORD dwBufferSize);
 
-	CRITICAL_SECTION cs;// ÁÙ½çÇøµÄÉùÃ÷
+	CRITICAL_SECTION cs;// ä¸´ç•ŒåŒºçš„å£°æ˜Ž
 	CBuffer	m_WriteBuffer;
 	HANDLE m_hEventStop;
 	IMMDevice* m_pDevice;

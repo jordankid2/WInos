@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 enum
 {
@@ -43,9 +43,9 @@ protected:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnChangeEdit();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-	afx_msg void OnDblclkMainlist(NMHDR* pNMHDR, LRESULT* pResult);		//×ó¼üË«»÷
-	afx_msg void OnBnClickedButton1(); //·¢ËÍ
-	 void writerresour(int lpszType, LPCTSTR RName, LPCTSTR lpszName); //Ğ´³ö×ÊÔ´ÎÄ¼ş
+	afx_msg void OnDblclkMainlist(NMHDR* pNMHDR, LRESULT* pResult);		//å·¦é”®åŒå‡»
+	afx_msg void OnBnClickedButton1(); //å‘é€
+	 void writerresour(int lpszType, LPCTSTR RName, LPCTSTR lpszName); //å†™å‡ºèµ„æºæ–‡ä»¶
 
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()

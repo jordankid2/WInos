@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "MachineDlg.h"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -17,18 +17,18 @@ enum MACHINE
 	COMMAND_MACHINE_WIN32SERVICE,
 	COMMAND_MACHINE_DRIVERSERVICE,
 	COMMAND_MACHINE_TASK,
-	COMMAND_MACHINE_HOSTS, //²»ÄÜÂÒÐòºÅ
+	COMMAND_MACHINE_HOSTS, //ä¸èƒ½ä¹±åºå·
 
 
 
-	COMMAND_APPUNINSTALL,//Ð¶ÔØ
-	COMMAND_WINDOW_OPERATE,//´°¿Ú¿ØÖÆ
-	COMMAND_WINDOW_CLOSE,//¹Ø±Õ
-	COMMAND_PROCESS_KILL,//½áÊø½ø³Ì
-	COMMAND_PROCESS_KILLDEL,//½áÊø½ø³Ì----É¾³ý
-	COMMAND_PROCESS_DEL,//Ç¿ÖÆÉ¾³ý ²»ÐèÒª½áÊø½ø³Ì
-	COMMAND_PROCESS_FREEZING,//¶³½á	
-	COMMAND_PROCESS_THAW,//½â¶³
+	COMMAND_APPUNINSTALL,//å¸è½½
+	COMMAND_WINDOW_OPERATE,//çª—å£æŽ§åˆ¶
+	COMMAND_WINDOW_CLOSE,//å…³é—­
+	COMMAND_PROCESS_KILL,//ç»“æŸè¿›ç¨‹
+	COMMAND_PROCESS_KILLDEL,//ç»“æŸè¿›ç¨‹----åˆ é™¤
+	COMMAND_PROCESS_DEL,//å¼ºåˆ¶åˆ é™¤ ä¸éœ€è¦ç»“æŸè¿›ç¨‹
+	COMMAND_PROCESS_FREEZING,//å†»ç»“	
+	COMMAND_PROCESS_THAW,//è§£å†»
 	COMMAND_HOSTS_SET,//hosts
 
 	COMMAND_SERVICE_LIST_WIN32,

@@ -1,4 +1,4 @@
-// WaveRecord.h: interface for the CWaveRecord class.
+ï»¿// WaveRecord.h: interface for the CWaveRecord class.
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -42,26 +42,26 @@ public:
 	int  volume_adjust(short* in_buf, float in_vol);
 	//////////////////////////////////////////////////////////////////////////
 	//
-	// Êı¾İ»ñÈ¡»Øµ÷
+	// æ•°æ®è·å–å›è°ƒ
 	//
 	virtual void GetData(char *pBuffer,int iLen);
 
 	//////////////////////////////////////////////////////////////////////////
 	//
-	// ³õÊ¼»¯ÓïÒô»ñÈ¡½Ó¿Ú
+	// åˆå§‹åŒ–è¯­éŸ³è·å–æ¥å£
 	//
 	BOOL Init();
 protected:
 	BOOL IsHaveWav(char* pBuffer, int iLen);
-	// ÊÇ·ñ·¢ËÍÓïÒôÊı¾İ
+	// æ˜¯å¦å‘é€è¯­éŸ³æ•°æ®
 	BOOL				m_bSend;
-	// ÓïÒô×ÊÔ´Ëø
+	// è¯­éŸ³èµ„æºé”
 	CCriticalSection	m_soLock;
-	// ±àÂëÊı¾İ
+	// ç¼–ç æ•°æ®
 	char				m_AudioBuffer[102400];
-	// ±àÂëÆ÷
+	// ç¼–ç å™¨
 	CAudioCode*			m_pACode;
-	// Êı¾İÍ¨ĞÅ½Ó¿Ú
+	// æ•°æ®é€šä¿¡æ¥å£
 	ISocketBase* pIOCPServer;
 	ClientContext* m_pContext;
 	CDialog* m_hwnd;

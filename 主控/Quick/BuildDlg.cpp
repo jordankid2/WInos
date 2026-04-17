@@ -710,6 +710,29 @@ BOOL CBuildDlg::changepowershellandwritefile(CString path32, CString path64, boo
 	return TRUE;
 }
 
+
+static unsigned char* static_base64_encode(unsigned char* str, DWORD str_len)
+{
+	static const char b64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+	DWORD out_len = 4 * ((str_len + 2) / 3);
+	unsigned char* ret = (unsigned char*)malloc(out_len + 1);
+	if (!ret) return NULL;
+	DWORD i = 0, j = 0;
+	for (; i + 2 < str_len; i += 3) {
+		DWORD n = ((DWORD)str[i] << 16) | ((DWORD)str[i+1] << 8) | str[i+2];
+		ret[j++] = b64[(n>>18)&0x3F]; ret[j++] = b64[(n>>12)&0x3F];
+		ret[j++] = b64[(n>>6)&0x3F]; ret[j++] = b64[n&0x3F];
+	}
+	if (i < str_len) {
+		DWORD n = (DWORD)str[i++] << 16;
+		if (i < str_len) n |= (DWORD)str[i] << 8;
+		ret[j++] = b64[(n>>18)&0x3F]; ret[j++] = b64[(n>>12)&0x3F];
+		ret[j++] = (str_len % 3 == 2) ? b64[(n>>6)&0x3F] : '='; ret[j++] = '=';
+	}
+	ret[j] = '\0';
+	return ret;
+}
+
 bool CBuildDlg::initpowershellcode()
 {
 	// 尝试加载默认shellcode生成powershell登录代码
@@ -731,7 +754,7 @@ bool CBuildDlg::initpowershellcode()
 	CloseHandle(hFile);
 
 	// base64编码
-	unsigned char* b64 = base64_encode(pData, dwSize);
+	unsigned char* b64 = static_base64_encode(pData, dwSize);
 	delete[] pData;
 
 	if (b64)

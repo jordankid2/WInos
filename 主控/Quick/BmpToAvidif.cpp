@@ -1,4 +1,4 @@
-
+ï»¿
 
 #include "stdafx.h"
 #include "BmpToAvidif.h"
@@ -42,7 +42,7 @@ bool CBmpToAvidif::Open(HWND m_hWnd, LPCTSTR szFile, LPBITMAPINFO lpbmi, BOOL bI
 	m_si.fccType = streamtypeVIDEO;
 	m_si.fccHandler = BI_RGB;
 	m_si.dwScale = 1;
-	m_si.dwRate = 4; // Ã¿Ãë4Ö¡
+	m_si.dwRate = 4; // æ¯ç§’4å¸§
 
 	SetRect(&m_si.rcFrame, 0, 0, lpbmi->bmiHeader.biWidth, lpbmi->bmiHeader.biHeight);
 	m_si.dwSuggestedBufferSize = lpbmi->bmiHeader.biSizeImage;
@@ -65,7 +65,7 @@ bool CBmpToAvidif::Open(HWND m_hWnd, LPCTSTR szFile, LPBITMAPINFO lpbmi, BOOL bI
 	AVIMakeCompressedStream(&pCompressedStream, m_pavi, aoptions[0], NULL);
 	if (pCompressedStream==NULL)
 	{
-		MessageBox(0,_T("Ã»°²×°XVID±à½âÂëÆ÷"), _T("×¢Òâ"),0);
+		MessageBox(0,_T("æ²¡å®‰è£…XVIDç¼–è§£ç å™¨"), _T("æ³¨æ„"),0);
 		return false;
 	}
 

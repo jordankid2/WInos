@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "AudioRender.h"
 
 BOOL AdjustFormatTo16Bits(WAVEFORMATEX* pwfx);
@@ -86,14 +86,14 @@ UINT RenderAudio(CAudioRenderImpl* pthis)
 			nNeedDataLen = nFrameBufferSize - nFramesOfPadding;
 			hr = pAudioRenderClient->GetBuffer(nNeedDataLen, &pData);
 			if (FAILED(hr))break;
-			EnterCriticalSection(&pthis->cs);//½øÈëÁÙ½çÇø
+			EnterCriticalSection(&pthis->cs);//è¿›å…¥ä¸´ç•ŒåŒº
 			bufferlen = pthis->m_WriteBuffer.GetBufferLen();
 			audiolen = nNeedDataLen * pwfx->nBlockAlign;
 			if (bufferlen > audiolen && (!IsBadWritePtr(pData, audiolen)))
 				pthis->m_WriteBuffer.Read(pData, audiolen);
 			if (bufferlen > 60000)   
 				pthis->m_WriteBuffer.ClearBuffer();
-			LeaveCriticalSection(&pthis->cs);//Àë¿ªÁÙ½çÇø
+			LeaveCriticalSection(&pthis->cs);//ç¦»å¼€ä¸´ç•ŒåŒº
 			pAudioRenderClient->ReleaseBuffer(nNeedDataLen, 0);
 		}
 	} while (FALSE);

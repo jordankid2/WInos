@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 
 
@@ -22,10 +22,10 @@ public:
 	virtual void OnInitialUpdate();
 
 	void OnReceiveComplete(ClientContext* pContext);
-	void HandlingRightClickMessages(int nitem); //Ö÷ÓÒ¼ü²Ëµ¥ÏûÏ¢´¦Àí
+	void HandlingRightClickMessages(int nitem); //ä¸»å³é”®èœå•æ¶ˆæ¯å¤„ç†
 
-	void SendSelectCommand(PBYTE pData, UINT nSize);   //Ñ¡ÖĞ·¢ËÍÃüÁî¡ª¡ªÖ÷
-	void SendDll(LPCTSTR lpDllName, SENDTASK sendtask = TASK_MAIN); //·¢ËÍÆÕÍ¨¹¦ÄÜDLL
+	void SendSelectCommand(PBYTE pData, UINT nSize);   //é€‰ä¸­å‘é€å‘½ä»¤â€”â€”ä¸»
+	void SendDll(LPCTSTR lpDllName, SENDTASK sendtask = TASK_MAIN); //å‘é€æ™®é€šåŠŸèƒ½DLL
 	void DelClient(ClientContext* pContext);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support

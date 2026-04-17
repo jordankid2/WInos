@@ -1,4 +1,4 @@
-// ShellDlg.cpp : implementation file
+ï»¿// ShellDlg.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -59,7 +59,7 @@ BOOL CShellDlg::PreTranslateMessage(MSG* pMsg)
 	// TODO: Add your specialized code here and/or call the base class
 	if (pMsg->message == WM_KEYDOWN)
 	{
-		// ÆÁ±ÎVK_ESCAPE¡¢VK_DELETE
+		// å±è”½VK_ESCAPEã€VK_DELETE
 		if (pMsg->wParam == VK_ESCAPE || pMsg->wParam == VK_DELETE)
 			return true;
 
@@ -77,7 +77,7 @@ BOOL CShellDlg::PreTranslateMessage(MSG* pMsg)
 			m_iocpServer->Send(m_pContext, (LPBYTE)(stra.GetBuffer()), stra.GetLength());
 			m_nCurSel = m_edit.GetWindowTextLength();
 		}
-		// ÏŞÖÆVK_BACK
+		// é™åˆ¶VK_BACK
 		if (pMsg->wParam == VK_BACK && pMsg->hwnd == m_edit.m_hWnd)
 		{
 			if (m_edit.GetWindowTextLength() <= (int)m_nReceiveLength)
@@ -86,18 +86,18 @@ BOOL CShellDlg::PreTranslateMessage(MSG* pMsg)
 	
 	}
 
-	// CtrlÃ»°´ÏÂ
+	// Ctrlæ²¡æŒ‰ä¸‹
 	if (pMsg->message == WM_CHAR && GetKeyState(VK_CONTROL) >= 0)
 	{
 		int	len = m_edit.GetWindowTextLength();
 		m_edit.SetSel(len, len);
-		// ÓÃ»§É¾³ıÁË²¿·ÖÄÚÈİ£¬¸Ä±äm_nCurSel
+		// ç”¨æˆ·åˆ é™¤äº†éƒ¨åˆ†å†…å®¹ï¼Œæ”¹å˜m_nCurSel
 		if (len < (int)m_nCurSel)
 			m_nCurSel = len;
 	}
-	if (pMsg->message == WM_KEYDOWN && pMsg->wParam == VK_RETURN)//²¶×½»Ø³µ
+	if (pMsg->message == WM_KEYDOWN && pMsg->wParam == VK_RETURN)//æ•æ‰å›è½¦
 	{
-		return TRUE;//Ö±½Ó·µ»Øtrue
+		return TRUE;//ç›´æ¥è¿”å›true
 	}
 	else
 	{
@@ -116,9 +116,9 @@ BOOL CShellDlg::OnInitDialog()
 	m_nCurSel = m_edit.GetWindowTextLength();
 
 	List_cmd.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_UNDERLINEHOT | LVS_EX_SUBITEMIMAGES | LVS_EX_GRIDLINES);
-	List_cmd.InsertColumn(0, _T("±êÌâ"), LVCFMT_LEFT, 120, -1);
-	List_cmd.InsertColumn(1, _T("ÃüÁî"), LVCFMT_LEFT, 500, -1);
-	List_cmd.InsertColumn(2, _T("ËµÃ÷"), LVCFMT_LEFT, 700, -1);
+	List_cmd.InsertColumn(0, _T("æ ‡é¢˜"), LVCFMT_LEFT, 120, -1);
+	List_cmd.InsertColumn(1, _T("å‘½ä»¤"), LVCFMT_LEFT, 500, -1);
+	List_cmd.InsertColumn(2, _T("è¯´æ˜"), LVCFMT_LEFT, 700, -1);
 
 
 
@@ -129,19 +129,19 @@ BOOL CShellDlg::OnInitDialog()
 	cstrFileFullPath = DatPath;
 	cstrFileFullPath += _T("\\Plugins\\x86\\cmd.txt");
 
-	// ÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ
+	// åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 	bool bFileExist = PathFileExists(cstrFileFullPath)
 		&& (!PathIsDirectory(cstrFileFullPath));
 	if (false == bFileExist)
 		writerresour(IDR_TEXT_CMD, _T("TEXT"), cstrFileFullPath);
-		// ´ò¿ªÎÄ¼ş
+		// æ‰“å¼€æ–‡ä»¶
 		CStdioFile file;
 		BOOL ret = file.Open(cstrFileFullPath,
 			CFile::modeRead | CFile::shareDenyNone);
 		if (ret)
 		{
 			file.SeekToBegin();
-			// Ñ­»·¶ÁÈ¡ÎÄ¼ş
+			// å¾ªç¯è¯»å–æ–‡ä»¶
 			CString cstrLine; int i = 0;
 			while (1)
 			{
@@ -160,7 +160,7 @@ BOOL CShellDlg::OnInitDialog()
 				if (!file.ReadString(cstrLine)) 	break;		
 				i++;
 			}
-			// ¹Ø±ÕÎÄ¼ş
+			// å…³é—­æ–‡ä»¶
 			file.Close();
 		}
 	
@@ -168,12 +168,12 @@ BOOL CShellDlg::OnInitDialog()
 	m_nCurSel = m_edit.GetWindowTextLength();
 
 	CString str;
-	str.Format(_T("Ô¶³ÌÖÕ¶Ë \\\\ %s "), m_pContext->szAddress),
+	str.Format(_T("è¿œç¨‹ç»ˆç«¯ \\\\ %s "), m_pContext->szAddress),
 		SetWindowText(str);
 
-	m_edit.SetLimitText(MAXDWORD); // ÉèÖÃ×î´ó³¤¶È
+	m_edit.SetLimitText(MAXDWORD); // è®¾ç½®æœ€å¤§é•¿åº¦
 	ResizeEdit();
-	// Í¨ÖªÔ¶³Ì¿ØÖÆ¶Ë¶Ô»°¿òÒÑ¾­´ò¿ª
+	// é€šçŸ¥è¿œç¨‹æ§åˆ¶ç«¯å¯¹è¯æ¡†å·²ç»æ‰“å¼€
 	BYTE bToken = COMMAND_NEXT;
 	m_iocpServer->Send(m_pContext, &bToken, sizeof(BYTE));
 
@@ -182,20 +182,20 @@ BOOL CShellDlg::OnInitDialog()
 }
 
 
-void CShellDlg::writerresour(int lpszType, LPCTSTR RName, LPCTSTR lpszName) //Ğ´³ö×ÊÔ´ÎÄ¼ş
+void CShellDlg::writerresour(int lpszType, LPCTSTR RName, LPCTSTR lpszName) //å†™å‡ºèµ„æºæ–‡ä»¶
 {
-	// ²éÕÒËùĞèµÄ×ÊÔ´
+	// æŸ¥æ‰¾æ‰€éœ€çš„èµ„æº
 	HRSRC   hResInfo = FindResource(GetModuleHandle(NULL), MAKEINTRESOURCE(lpszType), RName);
 	if (hResInfo == NULL) return;
-	// »ñµÃ×ÊÔ´³ß´ç
+	// è·å¾—èµ„æºå°ºå¯¸
 	DWORD dwSize = SizeofResource(NULL, hResInfo);
-	// ×°ÔØ×ÊÔ´
+	// è£…è½½èµ„æº
 	HGLOBAL hResData = LoadResource(NULL, hResInfo);
 	if (hResData == NULL) return;
 
 	LPBYTE p_date = new BYTE[dwSize];
 	if (p_date == NULL)     return;
-	// ¸´ÖÆ×ÊÔ´Êı¾İ
+	// å¤åˆ¶èµ„æºæ•°æ®
 	CopyMemory((LPVOID)p_date, (LPCVOID)LockResource(hResData), dwSize);
 
 	HANDLE hFile = CreateFile(lpszName, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, 0, NULL);
@@ -214,7 +214,7 @@ void CShellDlg::OnReceive()
 		return;
 	if (m_bOnClose) 	return;
 	CString str;
-	str.Format(_T("Ô¶³ÌÖÕ¶Ë \\\\ %s   [ÊÕ°ü:%d ÊÕ:%d KB] [·¢°ü:%d ·¢:%d KB]"), m_pContext->szAddress, m_pContext->m_allpack_rev, int(m_pContext->m_alldata_rev / 1024), m_pContext->m_allpack_send, int(m_pContext->m_alldata_send / 1024));
+	str.Format(_T("è¿œç¨‹ç»ˆç«¯ \\\\ %s   [æ”¶åŒ…:%d æ”¶:%d KB] [å‘åŒ…:%d å‘:%d KB]"), m_pContext->szAddress, m_pContext->m_allpack_rev, int(m_pContext->m_alldata_rev / 1024), m_pContext->m_allpack_send, int(m_pContext->m_alldata_send / 1024));
 	SetWindowText(str);
 }
 
@@ -240,7 +240,7 @@ void CShellDlg::AddKeyBoardData()
 	m_nCurSel = m_edit.GetWindowTextLength();
 
 
-	// ×îºóÌîÉÏ0
+	// æœ€åå¡«ä¸Š0
 	//m_pContext->m_DeCompressionBuffer.Write((LPBYTE)"", 1);
 	//CString strResult = m_pContext->m_DeCompressionBuffer.GetBuffer(0);
 
@@ -291,28 +291,28 @@ void CShellDlg::ResizeEdit()
 	rectEdit.right = rectClient.right-5;
 	rectEdit.bottom = rectClient.bottom-197-75;
 	if (m_edit.GetSafeHwnd() != NULL)
-		m_edit.MoveWindow(&rectEdit); //CMD±à¼­¿ò
+		m_edit.MoveWindow(&rectEdit); //CMDç¼–è¾‘æ¡†
 
 	rectEdit.left = 5;
 	rectEdit.top = rectClient.bottom -194;
 	rectEdit.right = rectClient.right - 5;
 	rectEdit.bottom = rectClient.bottom-5 ;
 	if (List_cmd.GetSafeHwnd() != NULL)
-		List_cmd.MoveWindow(&rectEdit); //ÁĞ±í
+		List_cmd.MoveWindow(&rectEdit); //åˆ—è¡¨
 
 	rectEdit.left = 5;
 	rectEdit.top = rectClient.bottom - 194-70;
 	rectEdit.right = rectClient.right - 5-70;
 	rectEdit.bottom = rectClient.bottom - 200;
 	if (SendEdit.GetSafeHwnd() != NULL)
-		SendEdit.MoveWindow(&rectEdit); //±à¼­¿ò
+		SendEdit.MoveWindow(&rectEdit); //ç¼–è¾‘æ¡†
 
 	rectEdit.left = rectClient.right - 70;
 	rectEdit.top = rectClient.bottom - 194 - 70;
 	rectEdit.right = rectClient.right - 5;
 	rectEdit.bottom = rectClient.bottom - 200;
 	if (SendButton.GetSafeHwnd() != NULL)
-		SendButton.MoveWindow(&rectEdit); //±à¼­¿ò
+		SendButton.MoveWindow(&rectEdit); //ç¼–è¾‘æ¡†
 
 }
 
@@ -335,10 +335,10 @@ HBRUSH CShellDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	if ((pWnd->GetDlgCtrlID() == IDC_EDIT) && (nCtlColor == CTLCOLOR_EDIT))
 	{
 		COLORREF clr = RGB(255, 255, 255);
-		pDC->SetTextColor(clr);   //ÉèÖÃ°×É«µÄÎÄ±¾
+		pDC->SetTextColor(clr);   //è®¾ç½®ç™½è‰²çš„æ–‡æœ¬
 		clr = RGB(0, 0, 0);
-		pDC->SetBkColor(clr);     //ÉèÖÃºÚÉ«µÄ±³¾°
-		return CreateSolidBrush(clr);  //×÷ÎªÔ¼¶¨£¬·µ»Ø±³¾°É«¶ÔÓ¦µÄË¢×Ó¾ä±ú
+		pDC->SetBkColor(clr);     //è®¾ç½®é»‘è‰²çš„èƒŒæ™¯
+		return CreateSolidBrush(clr);  //ä½œä¸ºçº¦å®šï¼Œè¿”å›èƒŒæ™¯è‰²å¯¹åº”çš„åˆ·å­å¥æŸ„
 	}
 	else
 	{
@@ -358,7 +358,7 @@ void CShellDlg::PostNcDestroy()
 }
 
 
-//Ö÷ÁĞ±í×ó¼üË«»÷
+//ä¸»åˆ—è¡¨å·¦é”®åŒå‡»
 void CShellDlg::OnDblclkMainlist(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);

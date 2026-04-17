@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "WaveOut.h"
 #pragma comment(lib,"Winmm")
 
@@ -24,11 +24,11 @@ DWORD WINAPI CWaveOut::AudioOutThreadProc(LPVOID lpParameter)
 			TRACE("WOM_CLOSE \n");
 			break;
 		case WOM_DONE:
-			// É¾³ıÉÏ´Î²¥·ÅÊı¾İ
+			// åˆ é™¤ä¸Šæ¬¡æ’­æ”¾æ•°æ®
 			WAVEHDR* pwh=(WAVEHDR*)msg.lParam;
 			waveOutUnprepareHeader((HWAVEOUT)msg.wParam,pwh,sizeof(WAVEHDR));
 			pWaveIn->BufferSub ();
-			delete []pwh->lpData;//É¾³ıPlayµ÷ÓÃÊ±·ÖÅäµÄÄÚ´æ
+			delete []pwh->lpData;//åˆ é™¤Playè°ƒç”¨æ—¶åˆ†é…çš„å†…å­˜
 			delete pwh;
 			break;
 		}
@@ -249,7 +249,7 @@ WORD CWaveOut::GetChannel()
 
 BOOL CWaveOut::Play(char* buf,UINT uSize)
 {
-	if (!csFileName.IsEmpty())// ÕıÔÚÂ¼Òô
+	if (!csFileName.IsEmpty())// æ­£åœ¨å½•éŸ³
 	{
 		m_wavefile.WriteWavData((LPBYTE)buf, uSize);
 		m_wavefile.SeekToEnd();
@@ -262,10 +262,10 @@ BOOL CWaveOut::Play(char* buf,UINT uSize)
 		return FALSE;
 	}
 
-	// µÈ´ıÊı¾İ²¥·Å
+	// ç­‰å¾…æ•°æ®æ’­æ”¾
 	while( GetBufferNum() > PLAY_DELAY )
 	{
-		// ÏûÏ¢Ñ­»·
+		// æ¶ˆæ¯å¾ªç¯
 		while(PeekMessage(&msg,NULL,NULL,NULL,PM_REMOVE))
 		{
 			TranslateMessage(&msg);

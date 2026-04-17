@@ -1,4 +1,4 @@
-// ProxyMapDlg.cpp : implementation file
+ï»¿// ProxyMapDlg.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -66,7 +66,7 @@ BOOL CProxyMapDlg::OnInitDialog()
 	m_edit_other.SetLimitText(MAXDWORD); 
 	CString		str;
 
-	// ¿ªÆôIPCP·şÎñÆ÷
+	// å¼€å¯IPCPæœåŠ¡å™¨
 	nPort = 1500;
 	for (int i = 0; i < 20; i++)
 	{
@@ -82,7 +82,7 @@ BOOL CProxyMapDlg::OnInitDialog()
 			}
 			else
 			{
-				str.Format(_T("\\\\´úÀí·şÎñÆ÷ ¶Ë¿Ú°ó¶¨Ê§°Ü  Ä¬ÈÏ¶Ë¿Ú \r\n"));
+				str.Format(_T("\\\\ä»£ç†æœåŠ¡å™¨ ç«¯å£ç»‘å®šå¤±è´¥  é»˜è®¤ç«¯å£ \r\n"));
 				SetWindowText(str);
 				return FALSE;
 			}
@@ -91,16 +91,16 @@ BOOL CProxyMapDlg::OnInitDialog()
 	TCHAR lisip[256] = _T("");
 	int iplen = sizeof(lisip);
 	m_iocpLocal->m_TcpServer->GetListenAddress(lisip, iplen, nPort);
-	str.Format(_T("´úÀí·şÎñÆ÷ \\\\ %s ¶Ë¿Ú: %d \r\n"), m_pContext->szAddress, nPort);
+	str.Format(_T("ä»£ç†æœåŠ¡å™¨ \\\\ %s ç«¯å£: %d \r\n"), m_pContext->szAddress, nPort);
 	SetWindowText(str);
-	str.Format(_T("socks´úÀíÈí¼şÇëÉèÖÃ·şÎñÆ÷Îª:127.0.0.1, ¶Ë¿ÚÎª:%d \r\n"), nPort);
+	str.Format(_T("socksä»£ç†è½¯ä»¶è¯·è®¾ç½®æœåŠ¡å™¨ä¸º:127.0.0.1, ç«¯å£ä¸º:%d \r\n"), nPort);
 	AddLog(str.GetBuffer(0));
 
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
 	if (pSysMenu != NULL)
 	{
 		pSysMenu->AppendMenu(MF_SEPARATOR);
-		pSysMenu->AppendMenu(MF_STRING, IDM_PROXY_CHROME, _T("´úÀí·½Ê½´ò¿ªchrome(±ØĞë¹Ø±ÕËùÓĞchrome½ø³Ì£¬Èç±ÀÀ£²»ÒªÔÙÊ¹ÓÃ)(&P)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_PROXY_CHROME, _T("ä»£ç†æ–¹å¼æ‰“å¼€chrome(å¿…é¡»å…³é—­æ‰€æœ‰chromeè¿›ç¨‹ï¼Œå¦‚å´©æºƒä¸è¦å†ä½¿ç”¨)(&P)"));
 	}
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -134,7 +134,7 @@ void CALLBACK CProxyMapDlg::NotifyProc(ClientContext* pContext, UINT nCode)
 		switch (nCode)
 		{
 		case NC_CLIENT_CONNECT:
-			wsprintf(szMsg, _T("%d ĞÂÁ¬½Ó\r\n"), index);
+			wsprintf(szMsg, _T("%d æ–°è¿æ¥\r\n"), index);
 			break;
 		case NC_CLIENT_DISCONNECT:
 			if (pContext->m_bProxyConnected)
@@ -144,7 +144,7 @@ void CALLBACK CProxyMapDlg::NotifyProc(ClientContext* pContext, UINT nCode)
 				memcpy(lpData + 1, &index, sizeof(DWORD));
 				g_pProxyMap->m_iocpServer->Send(g_pProxyMap->m_pContext, lpData, 5);
 			}
-			wsprintf(szMsg, _T("%d ±¾µØÁ¬½Ó¶Ï¿ª\r\n"), index);
+			wsprintf(szMsg, _T("%d æœ¬åœ°è¿æ¥æ–­å¼€\r\n"), index);
 			break;
 		case NC_TRANSMIT:
 			break;
@@ -153,7 +153,7 @@ void CALLBACK CProxyMapDlg::NotifyProc(ClientContext* pContext, UINT nCode)
 			{
 				g_pProxyMap->m_iocpServer->Send(g_pProxyMap->m_pContext, pContext->m_CompressionBuffer.GetBuffer(),
 					pContext->m_CompressionBuffer.GetBufferLen());
-				wsprintf(szMsg, _T("%d <==·¢ %d bytes\r\n"), index, pContext->m_CompressionBuffer.GetBufferLen() - 5);
+				wsprintf(szMsg, _T("%d <==å‘ %d bytes\r\n"), index, pContext->m_CompressionBuffer.GetBufferLen() - 5);
 			}
 			else if (pContext->m_bProxyConnected == 0)
 			{
@@ -161,7 +161,7 @@ void CALLBACK CProxyMapDlg::NotifyProc(ClientContext* pContext, UINT nCode)
 				LPBYTE lpData = pContext->m_CompressionBuffer.GetBuffer(5);
 				pContext->m_bProxyConnected = 1;
 				g_pProxyMap->m_iocpLocal->Send(pContext, (LPBYTE)msg_auth_ok, sizeof(msg_auth_ok));
-				wsprintf(szMsg, _T("%d ·µ»Ø±êÊ¾ %d %d %d\r\n"), index, lpData[0], lpData[1], lpData[2]);
+				wsprintf(szMsg, _T("%d è¿”å›æ ‡ç¤º %d %d %d\r\n"), index, lpData[0], lpData[1], lpData[2]);
 			}
 			else if (pContext->m_bProxyConnected == 1)
 			{
@@ -171,17 +171,17 @@ void CALLBACK CProxyMapDlg::NotifyProc(ClientContext* pContext, UINT nCode)
 				{
 					if (lpData[3] == 1)// ipv4
 					{
-						buf[0] = COMMAND_PROXY_CONNECT; // 1¸ö×Ö½Ú ip v4 Á¬½Ó 
-						memcpy(buf + 1, &index, 4);		 // ËÄ¸ö×Ö½Ú Ì×½Ó×ÖµÄ±àºÅ
-						memcpy(buf + 5, lpData + 4, 6);	 // 4×Ö½Úip 2×Ö½Ú¶Ë¿Ú
+						buf[0] = COMMAND_PROXY_CONNECT; // 1ä¸ªå­—èŠ‚ ip v4 è¿æ¥ 
+						memcpy(buf + 1, &index, 4);		 // å››ä¸ªå­—èŠ‚ å¥—æ¥å­—çš„ç¼–å·
+						memcpy(buf + 5, lpData + 4, 6);	 // 4å­—èŠ‚ip 2å­—èŠ‚ç«¯å£
 						g_pProxyMap->m_iocpServer->Send(g_pProxyMap->m_pContext, buf, sizeof(buf));
 						in_addr inaddr = {};
 						inaddr.s_addr = *(DWORD*)(buf + 5);
 						char szmsg1[MAX_PATH];
-						wsprintfA(szmsg1, "%d Ipv4 Á¬½Ó %s:%d...\r\n", index, inet_ntoa(inaddr), ntohs(*(USHORT*)(buf + 9)));
+						wsprintfA(szmsg1, "%d Ipv4 è¿æ¥ %s:%d...\r\n", index, inet_ntoa(inaddr), ntohs(*(USHORT*)(buf + 9)));
 						MultiByteToWideChar(CP_ACP, 0, szmsg1, -1, szMsg, sizeof(szMsg) / sizeof(szMsg[0]));
 					}
-					else if (lpData[3] == 3) // ÓòÃû
+					else if (lpData[3] == 3) // åŸŸå
 					{
 
 						Socks5Info* Socks5Request = (Socks5Info*)lpData;
@@ -193,12 +193,12 @@ void CALLBACK CProxyMapDlg::NotifyProc(ClientContext* pContext, UINT nCode)
 						memcpy(HostName + 5, &Socks5Request->szIP + Socks5Request->IP_LEN, 2);
 						g_pProxyMap->m_iocpServer->Send(g_pProxyMap->m_pContext, HostName, Socks5Request->IP_LEN + 8);
 						SAFE_DELETE_AR(HostName);
-						wsprintf(szMsg, _T("ÓòÃû Á¬½Ó %d \r\n"), index);
+						wsprintf(szMsg, _T("åŸŸå è¿æ¥ %d \r\n"), index);
 					}
 					else if (lpData[3] == 4)   //ipv6
 					{
 						char msg_ipv6_nok[] = { 0X05, 0X08, 0X00, 0X01, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00 }; // IPv6 not compt
-						wsprintf(szMsg, _T("%d ipv6Á¬½Ó ²»Ö§³Ö..."), index);
+						wsprintf(szMsg, _T("%d ipv6è¿æ¥ ä¸æ”¯æŒ..."), index);
 						g_pProxyMap->m_iocpLocal->Send(pContext, (LPBYTE)msg_ipv6_nok, sizeof(msg_ipv6_nok));
 						g_pProxyMap->m_iocpLocal->Disconnect(pContext->m_Socket);
 						break;
@@ -212,7 +212,7 @@ void CALLBACK CProxyMapDlg::NotifyProc(ClientContext* pContext, UINT nCode)
 					buf[3] = lpData[3];
 					g_pProxyMap->m_iocpLocal->Send(pContext, buf, sizeof(buf));
 					g_pProxyMap->m_iocpLocal->Disconnect(pContext->m_Socket);
-					wsprintf(szMsg, _T("%d ²»·ûÒªÇó,¶Ï¿ª %d %d %d\r\n"), index, lpData[0], lpData[1], lpData[3]);
+					wsprintf(szMsg, _T("%d ä¸ç¬¦è¦æ±‚,æ–­å¼€ %d %d %d\r\n"), index, lpData[0], lpData[1], lpData[3]);
 				}
 			}
 			break;
@@ -230,7 +230,7 @@ void CProxyMapDlg::OnReceive()
 		return;
 	if (m_bOnClose) 	return;
 	CString str;
-	str.Format(_T("´úÀí·şÎñÆ÷ \\\\ %s ¶Ë¿Ú: %d   [ÊÕ°ü:%d ÊÕ:%d KB] [·¢°ü:%d ·¢:%d KB]"), m_pContext->szAddress, nPort, m_pContext->m_allpack_rev, int(m_pContext->m_alldata_rev / 1024), m_pContext->m_allpack_send, int(m_pContext->m_alldata_send / 1024));
+	str.Format(_T("ä»£ç†æœåŠ¡å™¨ \\\\ %s ç«¯å£: %d   [æ”¶åŒ…:%d æ”¶:%d KB] [å‘åŒ…:%d å‘:%d KB]"), m_pContext->szAddress, nPort, m_pContext->m_allpack_rev, int(m_pContext->m_alldata_rev / 1024), m_pContext->m_allpack_send, int(m_pContext->m_alldata_send / 1024));
 	SetWindowText(str);
 }
 
@@ -265,10 +265,10 @@ void CProxyMapDlg::OnReceiveComplete()
 			if (sendbuf[1] == 0)
 			{
 				pContext_proxy->m_bProxyConnected = 2;
-				wsprintf(szMsg, _T("%d Á¬½Ó³É¹¦\r\n"), index);
+				wsprintf(szMsg, _T("%d è¿æ¥æˆåŠŸ\r\n"), index);
 			}
 			else
-				wsprintf(szMsg, _T("%d Á¬½ÓÊ§°Ü\r\n"), index);
+				wsprintf(szMsg, _T("%d è¿æ¥å¤±è´¥\r\n"), index);
 			m_iocpLocal->Send(pContext_proxy, sendbuf, sizeof(sendbuf));
 			AddLog(szMsg);
 		}
@@ -298,14 +298,14 @@ void CProxyMapDlg::OnReceiveComplete()
 				AddLog(szMsg);
 				return;
 			}
-			wsprintf(szMsg, _T("%d ==>ÊÕ %d bytes\r\n"), index, m_pContext->m_DeCompressionBuffer.GetBufferLen() - 5);
+			wsprintf(szMsg, _T("%d ==>æ”¶ %d bytes\r\n"), index, m_pContext->m_DeCompressionBuffer.GetBufferLen() - 5);
 			AddLog(szMsg);
 		
 		}
 	}
 	break;
 	default:
-		// ´«Êä·¢ÉúÒì³£Êı¾İ
+		// ä¼ è¾“å‘ç”Ÿå¼‚å¸¸æ•°æ®
 		break;
 	}
 }

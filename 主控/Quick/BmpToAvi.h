@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <windows.h>
 #include <vfw.h>
@@ -16,6 +16,6 @@ private:
 	PAVIFILE m_pfile;
 	PAVISTREAM m_pavi;
 	int m_nFrames;
-	static AVISTREAMINFO m_si; // Õâ¸ö²ÎÊıĞèÒªÊÇ¾²Ì¬µÄ
+	static AVISTREAMINFO m_si; // è¿™ä¸ªå‚æ•°éœ€è¦æ˜¯é™æ€çš„
 };
 

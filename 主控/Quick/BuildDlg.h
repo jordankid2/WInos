@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "DllToShellCode.h"
 
 
@@ -11,9 +11,7 @@ public:
 
 	CBuildDlg();
 	virtual ~CBuildDlg();
-#ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_BUILD };
-#endif
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 #ifndef _WIN32_WCE

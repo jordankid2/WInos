@@ -1,4 +1,4 @@
-// SoundToWav.h: interface for the CSoundToWav class.
+Ôªø// SoundToWav.h: interface for the CSoundToWav class.
 //
 
 #include <mmsystem.h>
@@ -22,8 +22,8 @@ private:
 
 public:
 
-	BOOL Open(LPCTSTR lpFileName, DWORD dwDesiredAccess = FILE_WRITE_DATA | FILE_READ_DATA/*≤ŒøºCreateFile*/);
-	DWORD Seek(LONG lDistanceToMove, DWORD dwMoveMethod = FILE_BEGIN/*≤ŒøºSetFilePointer*/);
+	BOOL Open(LPCTSTR lpFileName, DWORD dwDesiredAccess = FILE_WRITE_DATA | FILE_READ_DATA/*ÂèÇËÄÉCreateFile*/);
+	DWORD Seek(LONG lDistanceToMove, DWORD dwMoveMethod = FILE_BEGIN/*ÂèÇËÄÉSetFilePointer*/);
 	DWORD SeekToBegin();
 	DWORD SeekToEnd();
 	DWORD Write(LPVOID lpBuffer, DWORD nNumberOfBytesToWrite);

@@ -1,4 +1,4 @@
-// QuickDoc.cpp : implementation of the CQuickDoc class
+﻿// QuickDoc.cpp : implementation of the CQuickDoc class
 //
 
 #include "stdafx.h"

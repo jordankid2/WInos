@@ -1,4 +1,4 @@
-
+ï»¿
 #include "stdafx.h"
 #include "AudioCapture.h"
 
@@ -77,8 +77,8 @@ UINT CaptureAudio(CAudioCapture* pthis)
 		DWORD dwFlags;
 		int sendzise = 0;
 		LARGE_INTEGER liFirstFire;
-		liFirstFire.QuadPart = -hnsDefaultDevicePeriod / 2; // ¸ºÒâÎ¶×ÅÏà¶ÔÊ±¼ä
-		LONG lTimeBetweenFires = (LONG)hnsDefaultDevicePeriod / 2 / (10 * 1000); // ×ª»»ÎªºÁÃë
+		liFirstFire.QuadPart = -hnsDefaultDevicePeriod / 2; // è´Ÿæ„å‘³ç€ç›¸å¯¹æ—¶é—´
+		LONG lTimeBetweenFires = (LONG)hnsDefaultDevicePeriod / 2 / (10 * 1000); // è½¬æ¢ä¸ºæ¯«ç§’
 		BOOL bOK = SetWaitableTimer(hTimerWakeUp, &liFirstFire, lTimeBetweenFires, NULL, NULL, FALSE);
 		DWORD	dwWaitResult = 0;
 		HANDLE waitArray[2] = { pthis->m_hEventStop, hTimerWakeUp };

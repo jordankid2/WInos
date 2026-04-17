@@ -1,4 +1,4 @@
-
+ï»¿
 #include <iostream> 
 #include <vector>
 
@@ -105,35 +105,35 @@ protected:
 	afx_msg void OnMenuitemTreeCopyname();
 	BOOL IsTreeCtrlEditMessage(WPARAM KeyCode);
 	HTREEITEM FindItem(HTREEITEM item, CString strText);
-	afx_msg void OnBeginlabeleditTree(NMHDR* pNMHDR, LRESULT* pResult); //¿ªÊ¼±à¼­
-	afx_msg void OnEndlabeleditTree(NMHDR* pNMHDR, LRESULT* pResult); //½áÊø±à¼­
+	afx_msg void OnBeginlabeleditTree(NMHDR* pNMHDR, LRESULT* pResult); //å¼€å§‹ç¼–è¾‘
+	afx_msg void OnEndlabeleditTree(NMHDR* pNMHDR, LRESULT* pResult); //ç»“æŸç¼–è¾‘
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 protected:
 	HTREEITEM	m_hRoot;
-	HTREEITEM	SelectNode;// ÓÃ»§´ò¿ªµÄ½Úµã
+	HTREEITEM	SelectNode;// ç”¨æˆ·æ‰“å¼€çš„èŠ‚ç‚¹
 
 	CImageList m_ImageList, m_ImageTree;
 	static LPCTSTR m_strComputer, m_strDefault;
 
-	// »ñÈ¡È«Â·¾¶
+	// è·å–å…¨è·¯å¾„
 	CString GetFullPath(HTREEITEM hCurrent);
 	BYTE GetFatherPath(CString& FullPath);
 	void AddToTree(char* lpBuffer);
 	void AddToList(char* lpBuffer);
-	bool isEnable;    //¿Ø¼şÊÇ·ñ¿ÉÓÃ
+	bool isEnable;    //æ§ä»¶æ˜¯å¦å¯ç”¨
 	void EnableCursor(bool bEnable);
 	void GetRegTree(NM_TREEVIEW* pNMTreeView);
 	void ShowSucceed();
 
-	UINT nFlag;       // 1£¬É¾³ıÏî  2£¬ĞÂ½¨Ïî   3£¬É¾³ı¼ü  4£¬ ĞÂ½¨Ïî  5£¬±à¼­Ïî               
+	UINT nFlag;       // 1ï¼Œåˆ é™¤é¡¹  2ï¼Œæ–°å»ºé¡¹   3ï¼Œåˆ é™¤é”®  4ï¼Œ æ–°å»ºé¡¹  5ï¼Œç¼–è¾‘é¡¹               
 	CString strPath;
 
 	HICON m_hIcon;
 
-	// »ñÈ¡ÀàĞÍ
+	// è·å–ç±»å‹
 	BYTE GetEditType(int index);
-	bool isEdit;      //ÊÇ·ñÕıÔÚ±à¼­
+	bool isEdit;      //æ˜¯å¦æ­£åœ¨ç¼–è¾‘
 	CString Key;
 	CString Value;
 	BYTE  type;

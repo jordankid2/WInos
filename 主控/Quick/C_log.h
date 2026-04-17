@@ -1,4 +1,4 @@
-
+﻿
 #ifndef _FUNC_log_
 #define _FUNC_log_
 #include <windows.h>

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define ES_BORDER 0xffffffff
 #define ES_KEEPSIZE 0xfffffffe

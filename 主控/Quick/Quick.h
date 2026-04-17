@@ -1,4 +1,4 @@
-// Quick.h : main header file for the Quick application
+ï»¿// Quick.h : main header file for the Quick application
 //
 #pragma once
 
@@ -9,7 +9,7 @@
 #include "resource.h"       // main symbols
 #include <map>
 
-typedef std::map<CString, int*> map_osnums; //´æ·Å²å¼şÊı¾İ
+typedef std::map<CString, int*> map_osnums; //å­˜æ”¾æ’ä»¶æ•°æ®
 
 // CQuickApp:
 // See Quick.cpp for the implementation of this class
@@ -22,8 +22,8 @@ public:
 	~CQuickApp();
 	CString g_Exename;
 	map_osnums m_map_osnums;
-	CImageList m_pImageList_Large;  //ÏµÍ³´óÍ¼±ê
-	CImageList m_pImageList_Small;	//ÏµÍ³Ğ¡Í¼±ê
+	CImageList m_pImageList_Large;  //ç³»ç»Ÿå¤§å›¾æ ‡
+	CImageList m_pImageList_Small;	//ç³»ç»Ÿå°å›¾æ ‡
 	void ChangeOSnum(CString stros, bool isaddnum);
 // Overrides
 public:

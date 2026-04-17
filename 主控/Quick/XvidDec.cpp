@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+﻿#include "StdAfx.h"
 #include "XvidDec.h"
 #include "xvid.h"
 #ifdef _DEBUG

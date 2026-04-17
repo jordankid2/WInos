@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+﻿#include "StdAfx.h"
 #include "Quick.h"
 #include "CFileListCtrl.h"
 #include "FileManagerDlg.h"

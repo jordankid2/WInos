@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-// CKeyBoardDlg ¶Ô»°¿ò
+// CKeyBoardDlg å¯¹è¯æ¡†
 enum
 {
 	COMMAND_KEYBOARD_GETOFFLINE,
@@ -23,7 +23,7 @@ class CKeyBoardDlg : public CXTPResizeDialog
 	//DECLARE_DYNAMIC(CKeyBoardDlg)
 
 public:
-	CKeyBoardDlg(CWnd* pParent = NULL, ISocketBase* IOCPServer = NULL, ClientContext* ContextObject = NULL);   // ±ê×¼¹¹Ôìº¯Êı
+	CKeyBoardDlg(CWnd* pParent = NULL, ISocketBase* IOCPServer = NULL, ClientContext* ContextObject = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
 //	virtual ~CKeyBoardDlg();
 	ClientContext* m_pContext;
 	ISocketBase* m_iocpServer;
@@ -31,11 +31,11 @@ public:
 	CEdit m_edit_offline;
 	void CKeyBoardDlg::OnReceiveComplete(void);
 	void OnReceive();
-	// ¶Ô»°¿òÊı¾İ
+	// å¯¹è¯æ¡†æ•°æ®
 	enum {IDD = IDD_KEYBOARD};
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 	virtual void PostNcDestroy(); 
 	virtual void OnCancel();
 	DECLARE_MESSAGE_MAP()

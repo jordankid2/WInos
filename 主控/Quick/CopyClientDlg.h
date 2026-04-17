@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 
 
-// CCopyClientDlg ¶Ô»°¿ò
+// CCopyClientDlg å¯¹è¯æ¡†
 
 
 
@@ -11,12 +11,12 @@ class CCopyClientDlg : public CDialog
 	DECLARE_DYNAMIC(CCopyClientDlg)
 
 public:
-	CCopyClientDlg(CString title,CWnd* pParent = nullptr,bool bshow=false);   // ±ê×¼¹¹Ôìº¯Êı
+	CCopyClientDlg(CString title,CWnd* pParent = nullptr,bool bshow=false);   // æ ‡å‡†æ„é€ å‡½æ•°
 	virtual ~CCopyClientDlg();
 	COPYCLIENT m_COPYCLIENT;
 	bool m_show;
 	CString m_title;
-	// ¶Ô»°¿òÊı¾İ
+	// å¯¹è¯æ¡†æ•°æ®
 #ifdef AFX_DESIGN_TIME
 	enum {
 		IDD = IDD_COPYCLIENT
@@ -25,7 +25,7 @@ public:
 
 protected:
 	virtual BOOL OnInitDialog();
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 	void Setfindinfo(CString& s, const TCHAR* f1, TCHAR* outstring, BOOL user);
 	DECLARE_MESSAGE_MAP()
 public:

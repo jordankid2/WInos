@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #ifndef SIZE_AUDIO_FRAME
 #define SIZE_AUDIO_FRAME 960

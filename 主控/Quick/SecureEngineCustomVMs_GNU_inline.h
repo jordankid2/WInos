@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
  * Header: SecureEngineCustomVMs_GNU_inline.h
  * Description: GNU C inline assembly macros definitions
  *

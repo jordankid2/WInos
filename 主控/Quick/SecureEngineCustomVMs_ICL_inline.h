@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
  * Header: SecureEngineCustomVMs_ICL_inline.h
  * Description: ICL inline assembly macros definitions
  *

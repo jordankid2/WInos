@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
  * Header: SecureEngineCustomVMs_BorlandC_inline.h
  * Description: Borland C++ inline assembly macros definitions
  *

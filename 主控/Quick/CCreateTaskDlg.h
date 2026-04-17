@@ -1,23 +1,23 @@
-#pragma once
+ï»¿#pragma once
 
 
-// CCreateTaskDlg ¶Ô»°¿ò
+// CCreateTaskDlg å¯¹è¯æ¡†
 
 class CCreateTaskDlg : public CDialog
 {
 	DECLARE_DYNAMIC(CCreateTaskDlg)
 
 public:
-	CCreateTaskDlg(CWnd* pParent = nullptr);   // ±ê×¼¹¹Ôìº¯Êı
+	CCreateTaskDlg(CWnd* pParent = nullptr);   // æ ‡å‡†æ„é€ å‡½æ•°
 	virtual ~CCreateTaskDlg();
 
-	// ¶Ô»°¿òÊı¾İ
+	// å¯¹è¯æ¡†æ•°æ®
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_CREATETASK };
 #endif
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 
 	DECLARE_MESSAGE_MAP()
 public:

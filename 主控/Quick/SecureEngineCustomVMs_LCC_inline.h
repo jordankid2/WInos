@@ -1,4 +1,4 @@
-/******************************************************************************
+﻿/******************************************************************************
  * Header: SecureEngineCustomVMs_LCC_inline.h
  * Description: LCC inline assembly macros definitions
  *

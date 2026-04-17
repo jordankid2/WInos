@@ -1,4 +1,4 @@
-// LOGIN.cpp : implementation file
+ï»¿// LOGIN.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -68,7 +68,7 @@ void LOGIN::OnLogin()
 	WSADATA wsaData;
 	sockVersion = MAKEWORD(2, 2);
 	WSAStartup(sockVersion, &wsaData);
-	//´´½¨SOCK
+	//åˆ›å»ºSOCK
 	sockInt = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockInt == INVALID_SOCKET)
 	{
@@ -77,7 +77,7 @@ void LOGIN::OnLogin()
 		return;
 	}
 
-	//»ñÈ¡·şÎñÆ÷IPºÍ¶Ë¿Ú
+	//è·å–æœåŠ¡å™¨IPå’Œç«¯å£
 	serverAddr.sin_family = AF_INET;
 
 	char tgtIP[30] = { 0 };
@@ -99,11 +99,11 @@ void LOGIN::OnLogin()
 
 	serverAddr.sin_port = htons(atoi(m_userportA.GetBuffer()));
 
-	//Á¬½Ó·şÎñ
+	//è¿æ¥æœåŠ¡
 	if (connect(sockInt, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) == SOCKET_ERROR)
 	{
 		//////////////////////////////////////////////////////////
-		char* RWgsb1 = "Á¬½Ó·şÎñÆ÷Ê§°Ü", * PQyRw2 = "»òÊÇÕÊºÅ¹ıÆÚ.", * WrAIY3 = NULL;
+		char* RWgsb1 = "è¿æ¥æœåŠ¡å™¨å¤±è´¥", * PQyRw2 = "æˆ–æ˜¯å¸å·è¿‡æœŸ.", * WrAIY3 = NULL;
 		WrAIY3 = new char[strlen(RWgsb1) + strlen(PQyRw2) + 1];
 		strcpy_s(WrAIY3, strlen(RWgsb1) + strlen(PQyRw2) + 1, RWgsb1);
 		strcat_s(WrAIY3, strlen(RWgsb1) + strlen(PQyRw2) + 1, PQyRw2);
@@ -124,7 +124,7 @@ void LOGIN::OnLogin()
 	{
 
 		//////////////////////////////////////////////////////////
-		char* pyvrJ1 = "Á¬½Ó·şÎñÆ÷Ê§°Ü", * ffMII2 = "»òÊÇÕÊºÅ¹ıÆÚ.", * vLlAh3 = NULL;
+		char* pyvrJ1 = "è¿æ¥æœåŠ¡å™¨å¤±è´¥", * ffMII2 = "æˆ–æ˜¯å¸å·è¿‡æœŸ.", * vLlAh3 = NULL;
 		vLlAh3 = new char[strlen(pyvrJ1) + strlen(ffMII2) + 1];
 		strcpy_s(vLlAh3, strlen(pyvrJ1) + strlen(ffMII2) + 1, pyvrJ1);
 		strcat_s(vLlAh3, strlen(pyvrJ1) + strlen(ffMII2) + 1, ffMII2);
@@ -139,7 +139,7 @@ void LOGIN::OnLogin()
 	{
 
 		//////////////////////////////////////////////////////////
-		char* ZzxsL1 = "ÕËºÅ", * qbJrX2 = "´íÎó", * KiHpV3 = NULL;
+		char* ZzxsL1 = "è´¦å·", * qbJrX2 = "é”™è¯¯", * KiHpV3 = NULL;
 		KiHpV3 = new char[strlen(ZzxsL1) + strlen(qbJrX2) + 1];
 		strcpy_s(KiHpV3, strlen(ZzxsL1) + strlen(qbJrX2) + 1, ZzxsL1);
 		strcat_s(KiHpV3, strlen(ZzxsL1) + strlen(qbJrX2) + 1, qbJrX2);
@@ -150,13 +150,13 @@ void LOGIN::OnLogin()
 		return;
 	}
 
-	if (strstr(buff, "Pass") != NULL)//Í¨¹ıÑéÖ¤
+	if (strstr(buff, "Pass") != NULL)//é€šè¿‡éªŒè¯
 	{
 		closesocket(sockInt);
 		WSACleanup();
 	
 		dLogin = GetTickCount();
-		::MessageBoxA(0,buff + 6, "VipĞÅÏ¢", NULL);
+		::MessageBoxA(0,buff + 6, "Vipä¿¡æ¯", NULL);
 		OnCancel();
 	}
 }

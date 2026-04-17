@@ -1,4 +1,4 @@
-// RegeditTextDlg.cpp : implementation file
+ï»¿// RegeditTextDlg.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -54,7 +54,7 @@ void CRegeditTextDlg::OnOK()
 	// TODO: Add extra validation here
 	UpdateData(true);
 
-	CString restr = _T("Êı¾İ²»ÄÜÎª¿Õ£¡");
+	CString restr = _T("æ•°æ®ä¸èƒ½ä¸ºç©ºï¼");
 	if (m_strName == _T("") && !EPath) {
 		MessageBox(restr);
 		isOK = false;
@@ -91,14 +91,14 @@ BOOL CRegeditTextDlg::OnInitDialog()
 }
 
 
-// Â·¾¶±ä»Ò
+// è·¯å¾„å˜ç°
 void CRegeditTextDlg::EnablePath()
 {
 	GetDlgItem(IDC_EDIT_NAME)->EnableWindow(false);
 	UpdateData(false);
 }
 
-// key±ä»Ò
+// keyå˜ç°
 void CRegeditTextDlg::EnableKey()
 {
 	GetDlgItem(IDC_EDIT_DATE)->EnableWindow(false);
@@ -129,7 +129,7 @@ void CRegeditTextDlg::OnChangeEditDate()
 	}
 	length = m_strValue.GetLength();
 	if (length > 9)
-	{                               //Êı¾İ²»ÄÜ³¬·¶Î§
+	{                               //æ•°æ®ä¸èƒ½è¶…èŒƒå›´
 		m_strValue.Delete(length - 1);
 		UpdateData(false);
 	}

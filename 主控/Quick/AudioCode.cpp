@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "AudioCode.h"
 
 #define  L_FRAME_COMPRESSED 10

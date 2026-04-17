@@ -1,17 +1,17 @@
-#pragma once
+ï»¿#pragma once
 #include <map>
 #include "TKYLockRW.h"
 
 struct DLLInfo
 {
-	char mark[30];		//±ê¼Ç
-	char mode[30];		//Ö±½Ó¼ÓÔØ
-	BOOL isx86;			//ÊÇ²»ÊÇ32Î»
-	BOOL isautorun;		//ÊÇ·ñ×Ô¶¯ÔËĞĞ
-	TCHAR Group[255];	//²Ëµ¥·Ö×é
-	TCHAR dllname[255];	//DLLÃû×Ö
-	TCHAR dlltext[255]; //ËµÃ÷
-	BOOL bmutual;		//ÊÇ²»ÊÇ½»»¥
+	char mark[30];		//æ ‡è®°
+	char mode[30];		//ç›´æ¥åŠ è½½
+	BOOL isx86;			//æ˜¯ä¸æ˜¯32ä½
+	BOOL isautorun;		//æ˜¯å¦è‡ªåŠ¨è¿è¡Œ
+	TCHAR Group[255];	//èœå•åˆ†ç»„
+	TCHAR dllname[255];	//DLLåå­—
+	TCHAR dlltext[255]; //è¯´æ˜
+	BOOL bmutual;		//æ˜¯ä¸æ˜¯äº¤äº’
 };
 
 
@@ -25,8 +25,8 @@ protected:
 	int	g_Log_Count;
 		// Attributes
 public:
-	PluginsDate m_PlugsDatex86;  //²å¼şÊı¾İ
-	PluginsDate m_PlugsDatex64;  //²å¼şÊı¾İ
+	PluginsDate m_PlugsDatex86;  //æ’ä»¶æ•°æ®
+	PluginsDate m_PlugsDatex64;  //æ’ä»¶æ•°æ®
 	CListCtrl* m_pPlugList;
 	TKYLockRW mLockRM;
 	// Operations
@@ -69,20 +69,20 @@ private:
 };
 
 
-// CPlugChangeDlg ¶Ô»°¿ò
+// CPlugChangeDlg å¯¹è¯æ¡†
 
 class CPlugChangeDlg : public CDialog
 {
 	DECLARE_DYNAMIC(CPlugChangeDlg)
 
 public:
-	CPlugChangeDlg(CWnd* pParent = nullptr);   // ±ê×¼¹¹Ôìº¯Êı
+	CPlugChangeDlg(CWnd* pParent = nullptr);   // æ ‡å‡†æ„é€ å‡½æ•°
 	virtual ~CPlugChangeDlg();
 	CString	mFilePath0;
 	CString mFilePath1;
 	DWORD dwOffset;
 	BOOL Init(CString FilePath0, CString proFilePath1mpt);
-	// ¶Ô»°¿òÊı¾İ
+	// å¯¹è¯æ¡†æ•°æ®
 #ifdef AFX_DESIGN_TIME
 	enum {
 		IDD = IDD_PLUGCHANGE
@@ -90,7 +90,7 @@ public:
 #endif
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 
 	DECLARE_MESSAGE_MAP()
 public:

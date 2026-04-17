@@ -1,4 +1,4 @@
-// LocalUpload.cpp : implementation file
+ï»¿// LocalUpload.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -56,9 +56,9 @@ BOOL CLocalUpload::OnInitDialog()
 	// TODO: Add extra initialization here
 	OnButtonPath();
 
-	m_combo_type.InsertString(0, _T("Õı³£ÔËĞĞ"));
-	m_combo_type.InsertString(1, _T("Òş²ØÔËĞĞ"));
-	m_combo_type.InsertString(2, _T("²» ÔË ĞĞ"));
+	m_combo_type.InsertString(0, _T("æ­£å¸¸è¿è¡Œ"));
+	m_combo_type.InsertString(1, _T("éšè—è¿è¡Œ"));
+	m_combo_type.InsertString(2, _T("ä¸ è¿ è¡Œ"));
 	m_combo_type.SetCurSel(0);
 
 	m_type = 0;
@@ -97,7 +97,7 @@ void CLocalUpload::OnOK()
 
 	if (m_edit_path == "")
 	{
-		AfxMessageBox(_T("ÇëÑ¡ÔñÒªÉÏ´«µÄÎÄ¼ş"));
+		AfxMessageBox(_T("è¯·é€‰æ‹©è¦ä¸Šä¼ çš„æ–‡ä»¶"));
 		return;
 	}
 
@@ -107,10 +107,10 @@ void CLocalUpload::OnOK()
 	fopen_s(&file, m_edit_pathA, "rb");
 	if (file == NULL)
 	{
-		AfxMessageBox(_T("ÎÄ¼ş¶ÁÈ¡Ê§°Ü£¡"));
+		AfxMessageBox(_T("æ–‡ä»¶è¯»å–å¤±è´¥ï¼"));
 		return;
 	}
-	// ¶ÁÈ¡ÎÄ¼ş
+	// è¯»å–æ–‡ä»¶
 	unsigned char* data = NULL;
 	size_t size;
 	fseek(file, 0, SEEK_END);
@@ -146,7 +146,7 @@ void CLocalUpload::OnOK()
 	if (lpPacket)
 		delete[] lpPacket;
 
-	AfxMessageBox(_T("Ö¸Áî·¢ËÍ³É¹¦£¬´«ÊäÎÄ¼ş¹ı´óÊ±£¬ÇëÄÍĞÄµÈºò£¡"));
+	AfxMessageBox(_T("æŒ‡ä»¤å‘é€æˆåŠŸï¼Œä¼ è¾“æ–‡ä»¶è¿‡å¤§æ—¶ï¼Œè¯·è€å¿ƒç­‰å€™ï¼"));
 
 	CDialog::OnOK();
 }

