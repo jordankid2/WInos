@@ -61,7 +61,7 @@ BOOL CInjectCodeDlg::OnInitDialog()
 
 	m_combo_main.SetCurSel(0);
 
-	TCHAR			Time[255];		//运行时间
+	//TCHAR			Time[255];		//运行时间 (unused)
 	SYSTEMTIME stTime;
 	GetLocalTime(&stTime);
 	WORD wMonth = stTime.wMonth;

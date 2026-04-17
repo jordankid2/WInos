@@ -119,7 +119,7 @@ void LOGIN::OnLogin()
 	m_usernameA = m_username;
 	m_userpassA = m_userpass;
 
-	sprintf_s(USERIMFOR, "Login:%s@%s", m_usernameA, m_userpassA);
+	sprintf_s(USERIMFOR, "Login:%s@%s", m_usernameA.GetString(), m_userpassA.GetString());
 	if (send(sockInt, USERIMFOR, sizeof(USERIMFOR), 0) == SOCKET_ERROR)
 	{
 

@@ -315,7 +315,7 @@ void CBuildDlg::Setfindinfo(CString& s, const TCHAR* f1, TCHAR* outstring, BOOL 
 		if (endpos == -1) endpos = s.GetLength();
 		CString val = s.Mid(startpos, endpos - startpos);
 		if (outstring)
-			_tcscpy(outstring, val.GetString());
+			_tcscpy_s(outstring, MAX_PATH, val.GetString());
 		if (user && val.GetLength() > 0 && val[val.GetLength() - 1] == _T('1'))
 			user = TRUE;
 	}

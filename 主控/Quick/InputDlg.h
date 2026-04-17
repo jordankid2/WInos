@@ -67,7 +67,7 @@ public:
 
 	// Call this to create the template with given caption and prompt.
 	BOOL Init(LPCTSTR caption, LPCTSTR prompt, CWnd* pParent = NULL,
-		WORD nIDIcon = (WORD)IDI_QUESTION, CString str = _T(""));
+		WORD nIDIcon = 32514 /*IDI_QUESTION*/, CString str = _T(""));
 
 protected:
 	CDlgTemplateBuilder m_dtb;				 // place to build/hold the dialog template

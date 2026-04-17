@@ -161,7 +161,7 @@ LPSTR DecimalToHex(LPSTR Transition = NULL)
 		return NULL;
 	ZeroMemory(ResultDec, sizeof(ResultDec));
 
-	WORD Size = strlen(Transition);
+	WORD Size = (WORD)strlen(Transition);
 
 	CHAR Temp[5] = { NULL };
 

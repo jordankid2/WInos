@@ -156,7 +156,7 @@ BOOL CInputDialog::Init(LPCTSTR caption, LPCTSTR prompt, CWnd* pParent, WORD nID
 
 	// create icon if needed
 	if (nIDIcon) {
-		if (nIDIcon >= (WORD)IDI_APPLICATION) {
+		if (nIDIcon >= 32512 /*IDI_APPLICATION*/) {
 			// if using a system icon, I load it here and set it in OnInitDialog
 			// because can't specify system icon in template, only icons from
 			// application resource file.

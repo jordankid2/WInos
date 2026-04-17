@@ -91,7 +91,7 @@ void CChat::OnReceiveComplete()
 	GetLocalTime(&st);
 	TCHAR Text[8192] = { 0 };
 	swprintf_s(Text, _T("%s %d/%d/%d %d:%02d:%02d\r\n  %s\r\n\r\n"), _T("对方:"),
-		st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, strResult);
+		st.wYear, st.wMonth, st.wDay, st.wHour, st.wMinute, st.wSecond, strResult.GetString());
 	if (m_editChatLog.GetWindowTextLength() >= 20000)
 		m_editChatLog.SetWindowText(_T(""));
 	m_editChatLog.SetSel(-1);

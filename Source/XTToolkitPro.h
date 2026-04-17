@@ -250,7 +250,7 @@
 #elif _MSC_VER == 1900
 	#define _XTPLIB_VISUALSTUDIO_VERSION "vc140"
 #elif (1910 <= _MSC_VER) && (_MSC_VER < 2000)
-	#define _XTPLIB_VISUALSTUDIO_VERSION "vc150"
+	#define _XTPLIB_VISUALSTUDIO_VERSION "vc100"
 #elif
 	#error "Unknown Visual Studio version"
 #endif
